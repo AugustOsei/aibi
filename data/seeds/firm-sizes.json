@@ -1,0 +1,34 @@
+[
+  {
+    "id": "firm-size-micro",
+    "slug": "micro",
+    "name": "Micro",
+    "ordinal": 1,
+    "description": "The smallest named firm-size band; thresholds are defined separately by country and source context.",
+    "active": true
+  },
+  {
+    "id": "firm-size-small",
+    "slug": "small",
+    "name": "Small",
+    "ordinal": 2,
+    "description": "A small firm-size band; thresholds are defined separately by country and source context.",
+    "active": true
+  },
+  {
+    "id": "firm-size-medium",
+    "slug": "medium",
+    "name": "Medium",
+    "ordinal": 3,
+    "description": "A medium firm-size band; thresholds are defined separately by country and source context.",
+    "active": true
+  },
+  {
+    "id": "firm-size-large",
+    "slug": "large",
+    "name": "Large",
+    "ordinal": 4,
+    "description": "The largest named firm-size band; thresholds are defined separately by country and source context.",
+    "active": true
+  }
+]

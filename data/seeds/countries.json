@@ -1,0 +1,42 @@
+[
+  {
+    "id": "country-us",
+    "name": "United States",
+    "iso2": "US",
+    "iso3": "USA",
+    "aliases": ["US", "USA", "United States of America"],
+    "active": true,
+    "createdAt": "2026-08-23T00:00:00Z",
+    "updatedAt": "2026-08-23T00:00:00Z"
+  },
+  {
+    "id": "country-gb",
+    "name": "United Kingdom",
+    "iso2": "GB",
+    "iso3": "GBR",
+    "aliases": ["UK", "Great Britain"],
+    "active": true,
+    "createdAt": "2026-08-23T00:00:00Z",
+    "updatedAt": "2026-08-23T00:00:00Z"
+  },
+  {
+    "id": "country-ca",
+    "name": "Canada",
+    "iso2": "CA",
+    "iso3": "CAN",
+    "aliases": ["Canada"],
+    "active": true,
+    "createdAt": "2026-08-23T00:00:00Z",
+    "updatedAt": "2026-08-23T00:00:00Z"
+  },
+  {
+    "id": "country-gh",
+    "name": "Ghana",
+    "iso2": "GH",
+    "iso3": "GHA",
+    "aliases": ["Ghana"],
+    "active": true,
+    "createdAt": "2026-08-23T00:00:00Z",
+    "updatedAt": "2026-08-23T00:00:00Z"
+  }
+]

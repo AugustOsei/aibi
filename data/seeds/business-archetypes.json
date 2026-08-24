@@ -1,0 +1,74 @@
+[
+  {
+    "id": "archetype-law-firm",
+    "slug": "law-firm",
+    "name": "Law firm",
+    "description": "A business providing legal advice and representation.",
+    "active": true,
+    "createdAt": "2026-08-23T00:00:00Z",
+    "updatedAt": "2026-08-23T00:00:00Z"
+  },
+  {
+    "id": "archetype-accounting-firm",
+    "slug": "accounting-firm",
+    "name": "Accounting firm",
+    "description": "A business providing accounting, tax, audit, or bookkeeping services.",
+    "active": true,
+    "createdAt": "2026-08-23T00:00:00Z",
+    "updatedAt": "2026-08-23T00:00:00Z"
+  },
+  {
+    "id": "archetype-construction-contractor",
+    "slug": "construction-contractor",
+    "name": "Construction contractor",
+    "description": "A business delivering construction, renovation, or specialty trade work.",
+    "active": true,
+    "createdAt": "2026-08-23T00:00:00Z",
+    "updatedAt": "2026-08-23T00:00:00Z"
+  },
+  {
+    "id": "archetype-restaurant",
+    "slug": "restaurant",
+    "name": "Restaurant",
+    "description": "A business preparing and serving food or beverages to customers.",
+    "active": true,
+    "createdAt": "2026-08-23T00:00:00Z",
+    "updatedAt": "2026-08-23T00:00:00Z"
+  },
+  {
+    "id": "archetype-retail-store",
+    "slug": "retail-store",
+    "name": "Retail store",
+    "description": "A business selling goods directly to consumers through physical or digital channels.",
+    "active": true,
+    "createdAt": "2026-08-23T00:00:00Z",
+    "updatedAt": "2026-08-23T00:00:00Z"
+  },
+  {
+    "id": "archetype-barbershop-salon",
+    "slug": "barbershop-salon",
+    "name": "Barbershop / salon",
+    "description": "A business providing personal hair, grooming, or beauty services.",
+    "active": true,
+    "createdAt": "2026-08-23T00:00:00Z",
+    "updatedAt": "2026-08-23T00:00:00Z"
+  },
+  {
+    "id": "archetype-marketing-agency",
+    "slug": "marketing-agency",
+    "name": "Marketing agency",
+    "description": "A business providing strategy, creative, media, or campaign services.",
+    "active": true,
+    "createdAt": "2026-08-23T00:00:00Z",
+    "updatedAt": "2026-08-23T00:00:00Z"
+  },
+  {
+    "id": "archetype-healthcare-clinic",
+    "slug": "healthcare-clinic",
+    "name": "Healthcare clinic",
+    "description": "An outpatient business or organization providing clinical health services.",
+    "active": true,
+    "createdAt": "2026-08-23T00:00:00Z",
+    "updatedAt": "2026-08-23T00:00:00Z"
+  }
+]
