@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { CountryEvidencePanel } from "../../../components/country-evidence-panel";
 import { StatusChip } from "../../../components/status-chip";
 import { getCountryEvidence, getCountrySummaries, getCountrySummary, getIndustrySummaries } from "../../../src/application/aibi-service";
+import { createPageMetadata } from "../../../src/config/site";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -14,7 +15,13 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  return { title: getCountrySummary(slug)?.name ?? "Country" };
+  const country = getCountrySummary(slug);
+  const name = country?.name ?? "Country";
+  return createPageMetadata({
+    title: name,
+    description: `Explore available AI utilization evidence and industry context for ${name}.`,
+    path: `/countries/${slug}`,
+  });
 }
 
 export default async function CountryPage({ params }: Props) {

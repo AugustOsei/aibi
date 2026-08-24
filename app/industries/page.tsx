@@ -3,8 +3,13 @@ import Link from "next/link";
 
 import { StatusChip } from "../../components/status-chip";
 import { getIndustrySummaries } from "../../src/application/aibi-service";
+import { createPageMetadata } from "../../src/config/site";
 
-export const metadata: Metadata = { title: "Industries" };
+export const metadata: Metadata = createPageMetadata({
+  title: "Industries",
+  description: "Explore practical AI opportunity, observed utilization, and evidence gaps across the industries currently covered by AIBI.",
+  path: "/industries",
+});
 
 export default function IndustriesPage() {
   const industries = getIndustrySummaries();

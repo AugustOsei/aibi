@@ -3,8 +3,13 @@ import Link from "next/link";
 
 import { StatusChip } from "../../components/status-chip";
 import { getCountrySummaries } from "../../src/application/aibi-service";
+import { createPageMetadata } from "../../src/config/site";
 
-export const metadata: Metadata = { title: "Countries" };
+export const metadata: Metadata = createPageMetadata({
+  title: "Countries",
+  description: "Explore AIBI country coverage and official broad-sector evidence for AI utilization.",
+  path: "/countries",
+});
 
 export default function CountriesPage() {
   const countries = getCountrySummaries();

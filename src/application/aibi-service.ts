@@ -168,7 +168,15 @@ const PUBLIC_FACTOR_LABELS: Record<string, string> = {
   riskSuitability: "Professional and risk constraints",
 };
 
+const PUBLIC_CONSTRAINT_LABELS: Record<string, string> = {
+  "Task risk cap": "Risk constraint",
+  "Required human oversight cap": "Human oversight constraint",
+  "Recommended AI role cap": "Recommended AI role",
+};
+
 const publicFactorLabel = (factor: string) => {
+  const internalConstraint = Object.keys(PUBLIC_CONSTRAINT_LABELS).find((label) => factor.startsWith(`${label} (`));
+  if (internalConstraint) return factor.replace(internalConstraint, PUBLIC_CONSTRAINT_LABELS[internalConstraint] ?? internalConstraint);
   const internalName = Object.keys(PUBLIC_FACTOR_LABELS).find((name) => factor.startsWith(`${name} (`));
   return internalName ? factor.replace(internalName, PUBLIC_FACTOR_LABELS[internalName] ?? internalName) : factor;
 };

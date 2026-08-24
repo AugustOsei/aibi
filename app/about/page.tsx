@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 
 import { UpdatesCta } from "../../components/updates-cta";
+import { createPageMetadata } from "../../src/config/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "About",
   description: "Why the Artificial Intelligence Business Index tracks possible AI utilization, observed industry adoption, and the evidence gap between them.",
-};
+  path: "/about",
+});
 
 const indexLayers = [
   ["01", "Map what is possible", "AIBI organizes practical AI opportunities from simple, standard uses through integrated systems and advanced, human-led applications."],

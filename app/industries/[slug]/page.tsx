@@ -17,6 +17,7 @@ import {
   getLawFirmIndustryView,
 } from "../../../src/application/aibi-service";
 import { getCountryPracticalContext, getIndustryOutlook } from "../../../src/data/industry-outlooks";
+import { createPageMetadata } from "../../../src/config/site";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -30,11 +31,16 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const industry = getIndustrySummary(slug);
-  if (!industry) return { title: "Industry AI Outlook" };
-  return {
+  if (!industry) return createPageMetadata({
+    title: "Industry AI Outlook",
+    description: "Explore possible AI utilization and observed adoption evidence by industry.",
+    path: `/industries/${slug}`,
+  });
+  return createPageMetadata({
     title: `${industry.name} AI Opportunity vs Adoption`,
     description: `See what today’s AI could practically be used for in ${industry.name.toLowerCase()}, then review credible observed utilization and the evidence gap.`,
-  };
+    path: `/industries/${industry.slug}`,
+  });
 }
 
 function DevelopmentState({

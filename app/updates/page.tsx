@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import { createPageMetadata } from "../../src/config/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Updates",
   description: "Follow changes to AIBI country coverage, industry analysis, AI capability assessments, and adoption evidence.",
-};
+  path: "/updates",
+});
 
 const updateTypes = [
   "New industry analysis",

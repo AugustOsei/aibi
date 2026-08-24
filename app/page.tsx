@@ -3,11 +3,14 @@ import type { Metadata } from "next";
 import { AtlasExplorer } from "../components/atlas-explorer";
 import { UpdatesCta } from "../components/updates-cta";
 import { getCountrySummaries, getIndustrySummaries } from "../src/application/aibi-service";
+import { createPageMetadata } from "../src/config/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "AI Opportunity vs Adoption by Industry",
   description: "Choose a country and industry to explore the complete range of practical AI uses, credible observed utilization, and the evidence gap.",
-};
+  path: "/",
+  socialTitle: "Artificial Intelligence Business Index — AI Opportunity vs Adoption",
+});
 
 export default function OverviewPage() {
   return (

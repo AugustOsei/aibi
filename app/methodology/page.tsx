@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
+import { createPageMetadata } from "../../src/config/site";
 
-export const metadata: Metadata = { title: "Methodology" };
+export const metadata: Metadata = createPageMetadata({
+  title: "Methodology",
+  description: "How AIBI separates possible AI utilization from observed adoption evidence and calculates a gap only when measures are compatible.",
+  path: "/methodology",
+});
 
 const stages = [
   ["01", "Current AI capability", "Stable capability identities receive dated assessments of maturity, affordability, reliability, integration difficulty, oversight, and risk."],

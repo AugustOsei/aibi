@@ -83,6 +83,9 @@ test("public task constraints do not expose internal model field names", () => {
   for (const internalName of ["integrationEase", "oversightSuitability", "riskSuitability", "technicalApplicability"]) {
     assert.equal(renderedView.includes(internalName), false);
   }
+  for (const internalLabel of ["Task risk cap", "Required human oversight cap", "Recommended AI role cap"]) {
+    assert.equal(renderedView.includes(internalLabel), false);
+  }
 });
 
 test("law-firm AI depth levels do not repeat the same task", () => {
