@@ -11,19 +11,10 @@ import type { GeometryCollection, Topology } from "topojson-specification";
 import type { CountrySummaryView, IndustrySummaryView } from "../src/application/aibi-service";
 import { VisualFlow } from "./visual-flow";
 
-type AiLevelId = "standard" | "integrated" | "advanced";
-
 type Selection = {
   country: CountrySummaryView | null;
   industry: IndustrySummaryView | null;
-  level: AiLevelId | null;
 };
-
-const AI_LEVELS: Array<{ id: AiLevelId; name: string; summary: string }> = [
-  { id: "standard", name: "Standard", summary: "Everyday tools" },
-  { id: "integrated", name: "Integrated", summary: "Connected systems" },
-  { id: "advanced", name: "Advanced", summary: "Human-led automation" },
-];
 
 const GEO: Record<string, { lat: number; lon: number; code: string }> = {
   "united-states": { lat: 39, lon: -98, code: "US" },
@@ -230,21 +221,18 @@ export function AtlasExplorer({
   countries: CountrySummaryView[];
   industries: IndustrySummaryView[];
 }) {
-  const [selection, setSelection] = useState<Selection>({ country: null, industry: null, level: null });
+  const [selection, setSelection] = useState<Selection>({ country: null, industry: null });
   const [marketChosen, setMarketChosen] = useState(false);
   const selectCountry = useCallback((slug: string) => {
     const country = countries.find((item) => item.slug === slug);
     if (country) {
-      setSelection((current) => ({ ...current, country, industry: null, level: null }));
+      setSelection((current) => ({ ...current, country, industry: null }));
       setMarketChosen(true);
     }
   }, [countries]);
 
-  const resultHref = selection.industry && selection.level
-    ? `/industries/${selection.industry.slug}?${new URLSearchParams({
-      ...(selection.country ? { country: selection.country.slug } : {}),
-      level: selection.level,
-    }).toString()}#ai-uses`
+  const resultHref = selection.industry
+    ? `/industries/${selection.industry.slug}${selection.country ? `?country=${selection.country.slug}` : ""}#possible-utilization`
     : null;
 
   return (
@@ -253,9 +241,9 @@ export function AtlasExplorer({
         <header className="journey__intro">
           <div>
             <p className="journey__eyebrow">Artificial Intelligence Business Index</p>
-            <h1 id="journey-heading">How can industries use AI today?</h1>
+            <h1 id="journey-heading">What could industries be doing with today’s AI?</h1>
           </div>
-          <p>Follow the five steps below. Practical AI uses come first; reported adoption and the gap follow when comparable data exists.</p>
+          <p>Choose a country and industry. AIBI maps the full range of practical AI opportunity, then shows what credible evidence says businesses are actually doing.</p>
         </header>
 
         <VisualFlow />
@@ -274,8 +262,6 @@ export function AtlasExplorer({
               <span className={marketChosen ? "is-complete" : "is-current"}>1</span>
               <i className={selection.industry ? "is-complete" : ""} />
               <span className={!marketChosen ? "" : selection.industry ? "is-complete" : "is-current"}>2</span>
-              <i className={selection.level ? "is-complete" : ""} />
-              <span className={selection.level ? "is-complete" : selection.industry ? "is-current" : ""}>3</span>
             </div>
 
             <label className="journey-field">
@@ -288,7 +274,6 @@ export function AtlasExplorer({
                   setSelection({
                     country: value === "global" ? null : countries.find((country) => country.slug === value) ?? null,
                     industry: null,
-                    level: null,
                   });
                 }}
               >
@@ -305,7 +290,7 @@ export function AtlasExplorer({
                 value={selection.industry?.slug ?? ""}
                 onChange={(event) => {
                   const industry = industries.find((item) => item.slug === event.target.value) ?? null;
-                  setSelection((current) => ({ ...current, industry, level: null }));
+                  setSelection((current) => ({ ...current, industry }));
                 }}
               >
                 <option value="" disabled>{marketChosen ? "Choose an industry" : "Choose a country first"}</option>
@@ -313,23 +298,17 @@ export function AtlasExplorer({
               </select>
             </label>
 
-            <fieldset className={`journey-levels${selection.industry ? "" : " is-locked"}`} disabled={!selection.industry}>
-              <legend><b>03</b> AI integration level</legend>
-              <div>
-                {AI_LEVELS.map((level) => (
-                  <button
-                    type="button"
-                    key={level.id}
-                    className={selection.level === level.id ? "is-selected" : ""}
-                    aria-pressed={selection.level === level.id}
-                    onClick={() => setSelection((current) => ({ ...current, level: level.id }))}
-                  >
-                    <strong>{level.name}</strong>
-                    <small>{level.summary}</small>
-                  </button>
-                ))}
+            <div className={`journey-spectrum${selection.industry ? "" : " is-locked"}`}>
+              <p><b>03</b> Explore AI utilization depth</p>
+              <div aria-label="The complete AI utilization spectrum">
+                <span><strong>Standard</strong><small>Accessible tools</small></span>
+                <i aria-hidden="true" />
+                <span><strong>Integrated</strong><small>Connected systems</small></span>
+                <i aria-hidden="true" />
+                <span><strong>Advanced</strong><small>Human-led automation</small></span>
               </div>
-            </fieldset>
+              <small>All three levels are included in one industry outlook.</small>
+            </div>
 
             <div className={`journey__result${resultHref ? " is-ready" : ""}`} aria-live="polite">
               {resultHref ? (
@@ -337,18 +316,17 @@ export function AtlasExplorer({
                   <p>
                     <span>{selection.country?.name ?? "Global"}</span>
                     <span>{selection.industry?.name}</span>
-                    <span>{AI_LEVELS.find((level) => level.id === selection.level)?.name} AI</span>
                   </p>
-                  <Link href={resultHref}>Show what AI can do <b aria-hidden="true">↗</b></Link>
+                  <Link href={resultHref}>View industry outlook <b aria-hidden="true">↗</b></Link>
                 </>
               ) : (
-                <p className="journey__prompt">Complete the three choices to see the AI uses.</p>
+                <p className="journey__prompt">Choose a country and industry to view the complete outlook.</p>
               )}
             </div>
           </form>
         </div>
 
-        <p className="journey__footnote">Reported use and the gap appear after the practical AI uses, only when comparable evidence is available.</p>
+        <p className="journey__footnote">Possible utilization comes first. Observed utilization and the gap follow with source limitations kept visible.</p>
       </section>
     </div>
   );

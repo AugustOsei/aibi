@@ -13,8 +13,12 @@ export default function IndustriesPage() {
       <header className="page-intro">
         <p className="eyebrow">Industry index</p>
         <h1>Where practical AI meets real business work.</h1>
-        <p>Each industry baseline starts with its functions and tasks, then tests current AI against the realities of cost, reliability, implementation, oversight, and risk.</p>
+        <p>Each industry outlook starts with its functions and tasks, then tests current AI against the realities of cost, reliability, implementation, oversight, and risk.</p>
       </header>
+      <section className="coverage-summary" aria-labelledby="industry-coverage-heading">
+        <div><p className="eyebrow">Initial industry coverage</p><h2 id="industry-coverage-heading">The first set, not the finished index.</h2></div>
+        <p>The industries below are the beginning of broader coverage. Additional industries will be added as their work, evidence base, and practical AI opportunities can be represented responsibly.</p>
+      </section>
       <div className="industry-directory">
         {industries.map((industry, index) => (
           <Link href={`/industries/${industry.slug}`} key={industry.slug} className="directory-row">

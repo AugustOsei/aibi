@@ -1,7 +1,7 @@
 import type { WorkflowGroupView } from "../src/application/aibi-service";
 import { AiDepthNavigator } from "./ai-depth-navigator";
 
-export function WorkflowGroups({ groups, initialLevelId }: { groups: WorkflowGroupView[]; initialLevelId?: string | undefined }) {
+export function WorkflowGroups({ groups }: { groups: WorkflowGroupView[] }) {
   const levels = groups.map((group) => ({
     id: group.id === "common-sense" ? "standard" : group.id === "deeper-integration" ? "integrated" : "advanced",
     title: group.title,
@@ -15,5 +15,5 @@ export function WorkflowGroups({ groups, initialLevelId }: { groups: WorkflowGro
     })),
   }));
 
-  return <AiDepthNavigator levels={levels} initialLevelId={initialLevelId} />;
+  return <AiDepthNavigator levels={levels} />;
 }

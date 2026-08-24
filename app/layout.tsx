@@ -10,8 +10,8 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swa
 const newsreader = Newsreader({ subsets: ["latin"], variable: "--font-serif", display: "swap" });
 
 export const metadata: Metadata = {
-  title: { default: "AI Applications by Industry | Artificial Intelligence Business Index", template: "%s | AIBI" },
-  description: "Explore practical AI applications by industry, from standard automation to advanced human-led workflows, with regional context and adoption evidence.",
+  title: { default: "Artificial Intelligence Business Index — AI Opportunity vs Adoption", template: "%s | AIBI" },
+  description: "See what industries could be doing with today’s AI, what credible evidence says they are doing, and the utilization gap.",
   keywords: [
     "AI applications by industry",
     "how industries use AI",
@@ -19,17 +19,18 @@ export const metadata: Metadata = {
     "AI operations improvement",
     "AI adoption by industry",
     "AI utilization gap",
+    "AI opportunity vs adoption",
   ],
   openGraph: {
-    title: "AI Applications by Industry | AIBI",
-    description: "See how today’s AI can improve industry operations—from everyday tools to advanced, human-led applications.",
+    title: "Artificial Intelligence Business Index — AI Opportunity vs Adoption",
+    description: "Explore possible AI utilization by country and industry, review observed utilization evidence, and see where a gap can—or cannot—be measured.",
     type: "website",
     siteName: "Artificial Intelligence Business Index",
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Applications by Industry | AIBI",
-    description: "Explore what today’s AI makes possible across industries and regions.",
+    title: "AI Opportunity vs Adoption by Industry | AIBI",
+    description: "See possible AI utilization, observed industry use, and the evidence gap.",
   },
 };
 

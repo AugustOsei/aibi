@@ -5,13 +5,13 @@ export function IndustryAtlasHero({
   description,
   archetype,
   countryName,
-  levelName,
+  evaluationLabel,
 }: {
   name: string;
   description: string;
   archetype: string;
   countryName?: string | undefined;
-  levelName?: string | undefined;
+  evaluationLabel?: string | undefined;
 }) {
   return (
     <section className="result-hero">
@@ -33,7 +33,8 @@ export function IndustryAtlasHero({
         <dl className="result-context" aria-label="Selected view">
           <div><dt>Country</dt><dd>{countryName ?? "Global outlook"}</dd></div>
           <div><dt>Industry</dt><dd>{name}</dd></div>
-          <div><dt>Starting level</dt><dd>{levelName ?? "Standard AI"}</dd></div>
+          <div><dt>Organization analyzed</dt><dd>{archetype}</dd></div>
+          {evaluationLabel ? <div><dt>Last evaluated / Updated</dt><dd>{evaluationLabel}</dd></div> : null}
         </dl>
       </div>
     </section>

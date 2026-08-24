@@ -8,7 +8,7 @@ export function FunctionBreakdown({ functions }: { functions: FunctionBaselineVi
       <div className="section-heading section-heading--rule section-heading--split">
         <div>
           <p className="eyebrow">Explore every function</p>
-          <h2 id="function-heading">See the tasks behind the potential</h2>
+          <h2 id="function-heading">See the tasks behind the experimental index</h2>
         </div>
         <p>Scores describe bounded practical use, not permission to automate professional responsibility.</p>
       </div>

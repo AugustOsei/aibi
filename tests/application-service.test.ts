@@ -29,6 +29,12 @@ test("partial Actual and missing Gap remain explicit null states, never zero", (
 test("law-firm adoption observations remain separate, sourced constructs", () => {
   const observations = getLawFirmIndustryView().actual.observations;
   assert.deepEqual(observations.map(({ value }) => value), [68, 33, 79, 40]);
+  assert.deepEqual(observations.map(({ scopeLabel }) => scopeLabel), [
+    "Direct law-firm evidence",
+    "Direct law-firm evidence",
+    "Broader legal-profession evidence",
+    "Broader legal-profession evidence",
+  ]);
   assert.equal(new Set(observations.map(({ label }) => label)).size, observations.length);
   assert.ok(observations.every(({ source, denominator }) => source.url && denominator.length > 0));
 });
@@ -70,6 +76,13 @@ test("every scored task exposes readable capability evidence", () => {
   const scored = view.functions.flatMap(({ tasks }) => tasks).filter(({ practicality }) => practicality > 0);
   assert.ok(scored.every(({ capabilities }) => capabilities.length > 0));
   assert.ok(scored.every(({ capabilities }) => capabilities.every(({ sources }) => sources.length > 0)));
+});
+
+test("public task constraints do not expose internal model field names", () => {
+  const renderedView = JSON.stringify(getLawFirmIndustryView().functions);
+  for (const internalName of ["integrationEase", "oversightSuitability", "riskSuitability", "technicalApplicability"]) {
+    assert.equal(renderedView.includes(internalName), false);
+  }
 });
 
 test("law-firm AI depth levels do not repeat the same task", () => {

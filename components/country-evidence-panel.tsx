@@ -17,7 +17,8 @@ export function CountryEvidencePanel({
     <section className="country-evidence" aria-labelledby={`country-evidence-${evidence.country.slug}`}>
       <div className="country-evidence__heading">
         <div>
-          <p className="eyebrow">{evidence.country.name} evidence · {evidence.country.iso2}</p>
+          <p className="eyebrow">{industrySlug ? "Observed utilization · " : ""}{evidence.country.name} evidence · {evidence.country.iso2}</p>
+          {industrySlug ? <p className="country-evidence__scope">Broader official sector proxy · not direct industry adoption</p> : null}
           <h2 id={`country-evidence-${evidence.country.slug}`}>
             {industrySlug ? "What the closest official sector reports" : "Reported AI use by broad industry sector"}
           </h2>

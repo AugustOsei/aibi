@@ -1,9 +1,11 @@
 import Link from "next/link";
 
 const navigation = [
-  ["Explore", "/"],
+  ["About", "/about"],
+  ["Industries", "/industries"],
   ["Countries", "/countries"],
-  ["How it works", "/methodology"],
+  ["Methodology", "/methodology"],
+  ["Updates", "/updates"],
 ] as const;
 
 export function SiteHeader() {
@@ -16,9 +18,9 @@ export function SiteHeader() {
         </Link>
         <nav className="site-nav" aria-label="Main navigation">
           <div className="site-nav__inner">
-          {navigation.map(([label, href]) => (
-            <Link key={href} href={href}>{label}</Link>
-          ))}
+            {navigation.map(([label, href]) => (
+              <Link key={href} href={href}>{label}</Link>
+            ))}
           </div>
         </nav>
       </div>

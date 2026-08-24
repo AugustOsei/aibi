@@ -9,11 +9,16 @@ export function SiteFooter() {
           <p className="footer-copy">What AI can do. What industries report. The gap between them.</p>
         </div>
         <div className="footer-links">
+          <Link href="/about">About</Link>
           <Link href="/industries">Industries</Link>
           <Link href="/countries">Countries</Link>
           <Link href="/methodology">Methodology</Link>
+          <Link href="/updates">Updates</Link>
         </div>
-        <p className="footer-note">Missing evidence is shown as unavailable—not as zero.</p>
+        <div className="footer-note">
+          <p>Missing evidence is shown as unavailable—not as zero.</p>
+          <a href="https://www.theaugustdispatch.com" target="_blank" rel="noreferrer">Founded by the publisher of The August Dispatch ↗</a>
+        </div>
       </div>
     </footer>
   );

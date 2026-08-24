@@ -4,11 +4,9 @@ import { AiDepthNavigator } from "./ai-depth-navigator";
 export function IndustryCapabilityOutlook({
   outlook,
   countryContext,
-  initialLevelId,
 }: {
   outlook: IndustryOutlook;
   countryContext?: CountryPracticalContext | undefined;
-  initialLevelId?: string | undefined;
 }) {
   const levels = outlook.tiers.map((outlookTier) => ({
     id: outlookTier.id,
@@ -25,8 +23,8 @@ export function IndustryCapabilityOutlook({
   return (
     <>
       <section className="capability-outlook" aria-labelledby="capability-outlook-heading">
-        <h2 id="capability-outlook-heading" className="sr-only">AI applications by level</h2>
-        <AiDepthNavigator levels={levels} initialLevelId={initialLevelId} />
+        <h2 id="capability-outlook-heading" className="sr-only">Complete possible AI utilization spectrum</h2>
+        <AiDepthNavigator levels={levels} />
 
         <details className="capability-basis">
           <summary>Research basis and limitations</summary>
@@ -51,10 +49,11 @@ export function CountryPracticalLens({ context }: { context: CountryPracticalCon
   return (
     <section className="practical-lens" aria-labelledby={`practical-lens-${context.slug}`}>
       <header>
-        <p className="eyebrow">Country context · {context.name}</p>
-        <h2 id={`practical-lens-${context.slug}`}>What changes in {context.name}</h2>
+        <p className="eyebrow">Deployment context · {context.name}</p>
+        <h2 id={`practical-lens-${context.slug}`}>Deployment context in {context.name}</h2>
         <p>{context.framing}</p>
       </header>
+      <p className="practical-lens__disclaimer">This context does not currently change the Possible AI Utilization analysis or any experimental score.</p>
       <div className="practical-lens__factors">
         {context.factors.map((factor, index) => (
           <article key={factor.title}>

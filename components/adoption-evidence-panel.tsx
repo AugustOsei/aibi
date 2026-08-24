@@ -5,15 +5,15 @@ export function AdoptionEvidencePanel({ actual }: { actual: LawFirmIndustryView[
     <section className="adoption-evidence" aria-labelledby="adoption-evidence-heading">
       <div className="section-heading section-heading--rule section-heading--split">
         <div>
-          <p className="eyebrow">Observed adoption evidence</p>
-          <h2 id="adoption-evidence-heading">What current reports actually measure</h2>
+          <p className="eyebrow">Observed utilization</p>
+          <h2 id="adoption-evidence-heading">What law firms appear to be doing</h2>
         </div>
         <p>{actual.detail}</p>
       </div>
 
       <div className="adoption-note">
-        <strong>No combined Actual score yet.</strong>
-        <span>These percentages answer different questions. They are not averaged or subtracted from the Practical Potential score.</span>
+        <strong>No combined Observed Utilization score yet.</strong>
+        <span>These percentages answer different questions. They are not averaged or subtracted from the Possible AI Utilization analysis.</span>
       </div>
 
       <div className="adoption-observation-list">
@@ -24,6 +24,7 @@ export function AdoptionEvidencePanel({ actual }: { actual: LawFirmIndustryView[
               <strong>{observation.value}</strong><span>%</span>
             </div>
             <div className="adoption-observation__copy">
+              <p className="adoption-observation__scope">{observation.scopeLabel}</p>
               <h3>{observation.label}</h3>
               <p>{observation.geography}</p>
               <details>

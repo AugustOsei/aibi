@@ -92,6 +92,7 @@ export interface WorkflowGroupView {
 
 export interface AdoptionObservationView {
   id: string;
+  scopeLabel: string;
   label: string;
   value: number;
   unit: "percent";
@@ -156,6 +157,21 @@ const roleLabel = (role: string) => role
   .split("_")
   .map((word, index) => index === 0 ? `${word.charAt(0).toUpperCase()}${word.slice(1)}` : word)
   .join(" ");
+
+const PUBLIC_FACTOR_LABELS: Record<string, string> = {
+  technicalApplicability: "Technical fit",
+  maturity: "Technology maturity",
+  affordability: "Cost and accessibility",
+  reliability: "Reliability",
+  integrationEase: "Integration complexity",
+  oversightSuitability: "Human oversight requirements",
+  riskSuitability: "Professional and risk constraints",
+};
+
+const publicFactorLabel = (factor: string) => {
+  const internalName = Object.keys(PUBLIC_FACTOR_LABELS).find((name) => factor.startsWith(`${name} (`));
+  return internalName ? factor.replace(internalName, PUBLIC_FACTOR_LABELS[internalName] ?? internalName) : factor;
+};
 
 const industries: IndustrySummaryView[] = archetypeSeeds.map((seed) => {
   const presentation = INDUSTRY_PRESENTATION[seed.slug];
@@ -250,7 +266,7 @@ export const getLawFirmIndustryView = (): LawFirmIndustryView => {
         role: task.recommendedRole,
         roleLabel: roleLabel(task.recommendedRole),
         humanBoundary: taskModel.roleRationale,
-        limitingFactor: task.majorLimitingFactor,
+        limitingFactor: publicFactorLabel(task.majorLimitingFactor),
         evidenceConfidence: roleLabel(task.evidenceConfidence),
         capabilities: task.capabilityContributions.map((contribution) => {
           const version = capabilityVersionById.get(contribution.capabilityVersionId);
@@ -307,6 +323,9 @@ export const getLawFirmIndustryView = (): LawFirmIndustryView => {
       : observation.observationPeriod.sourceLabel ?? "Period not published";
     return {
       id: observation.id,
+      scopeLabel: observation.industry.sourceCategory === "Law firms"
+        ? "Direct law-firm evidence"
+        : "Broader legal-profession evidence",
       label: observation.measuredConcept,
       value: observation.value.value,
       unit: "percent",
