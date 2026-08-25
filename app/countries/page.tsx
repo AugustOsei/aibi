@@ -16,9 +16,9 @@ export default function CountriesPage() {
   return (
     <div className="shell page-shell">
       <header className="page-intro">
-        <p className="eyebrow">Geographic index</p>
-        <h1>Different markets. Different practical conditions.</h1>
-        <p>Explore official AI-use observations by broad industry sector. Sector mappings are shown as context—not converted into invented industry scores.</p>
+        <p className="eyebrow">Explore countries</p>
+        <h1>Start with the market you want to understand.</h1>
+        <p>Country context helps explain the conditions businesses operate in. Where official data exists, AIBI also shows reported AI use by broad industry sector—without turning imperfect matches into invented scores.</p>
       </header>
       <section className="coverage-summary" aria-labelledby="country-coverage-heading">
         <div><p className="eyebrow">Initial coverage</p><h2 id="country-coverage-heading">United States, United Kingdom, Canada, and Ghana</h2></div>

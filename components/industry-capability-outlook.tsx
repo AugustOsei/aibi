@@ -24,7 +24,7 @@ export function IndustryCapabilityOutlook({
     <>
       <section className="capability-outlook" aria-labelledby="capability-outlook-heading">
         <h2 id="capability-outlook-heading" className="sr-only">Complete possible AI utilization spectrum</h2>
-        <AiDepthNavigator levels={levels} />
+        <AiDepthNavigator levels={levels} industryName={outlook.name} />
 
         <details className="capability-basis">
           <summary>Research basis and limitations</summary>

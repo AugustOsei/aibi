@@ -19,8 +19,10 @@ export interface AiDepthLevel {
 
 export function AiDepthNavigator({
   levels,
+  industryName,
 }: {
   levels: AiDepthLevel[];
+  industryName: string;
 }) {
   const [activeLevelIndex, setActiveLevelIndex] = useState(0);
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
@@ -48,12 +50,12 @@ export function AiDepthNavigator({
   return (
     <section id="possible-utilization" className="simple-ai-guide" aria-labelledby={`${instanceId}-heading`}>
       <header className="simple-ai-guide__header">
-        <p>Possible AI utilization</p>
-        <h2 id={`${instanceId}-heading`}>What today’s AI could practically be used for</h2>
-        <span>Standard, Integrated and Advanced form one complete opportunity spectrum. Explore each depth below.</span>
+        <p>What’s possible today</p>
+        <h2 id={`${instanceId}-heading`}>How {industryName.toLowerCase()} can use AI—from simple help to deeper integration</h2>
+        <span>We’ve grouped the opportunities into three levels. Together, they show the range of practical AI use available to {industryName.toLowerCase()} today.</span>
       </header>
 
-      <div className="simple-level-tabs" role="tablist" aria-label="Possible AI utilization depth">
+      <div className="simple-level-tabs" role="tablist" aria-label="AI utilization level">
         {levels.map((level, index) => {
           const isActive = index === activeLevelIndex;
           return (

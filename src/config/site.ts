@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const SITE_NAME = "Artificial Intelligence Business Index";
-export const SITE_URL = "https://knowaibi.com";
+export const SITE_URL = "https://www.knowaibi.com";
 
 export const createPageMetadata = ({
   title,

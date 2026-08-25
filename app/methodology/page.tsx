@@ -23,8 +23,8 @@ export default function MethodologyPage() {
     <div className="shell page-shell methodology-page">
       <header className="page-intro">
         <p className="eyebrow">Methodology</p>
-        <h1>Two independent engines. One honest comparison.</h1>
-        <p>The index separates practical AI potential from observed adoption. Actual behavior cannot inflate or suppress the estimate of what is possible.</p>
+        <h1>How AIBI keeps what’s possible separate from what’s observed.</h1>
+        <p>AIBI first maps what today’s AI can reasonably do, then reviews credible evidence of what industries report using. Keeping those questions separate prevents adoption data from changing the assessment of what is technically and practically possible.</p>
       </header>
       <section className="method-contrast" aria-label="Possible and Actual distinction">
         <article><span>Possible</span><h2>What could reasonably be done?</h2><p>Built from current capabilities, business tasks, firm context, and practical constraints.</p></article>

@@ -22,8 +22,8 @@ export function IndustryAtlasHero({
         </div>
         <div className="result-hero__grid">
           <div>
-            <p className="result-hero__kicker">AI uses for</p>
-            <h1>{name}</h1>
+            <p className="result-hero__kicker">AI in practice</p>
+            <h1>What can {name.toLowerCase()} use AI for today?</h1>
           </div>
           <div className="result-hero__copy">
             <p>{description}</p>

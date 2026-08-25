@@ -6,7 +6,7 @@ export function SiteFooter() {
       <div className="shell site-footer__grid">
         <div>
           <p className="footer-mark">AIBI</p>
-          <p className="footer-copy">What AI can do. What industries report. The gap between them.</p>
+          <p className="footer-copy">See what today’s AI can do across industries, what businesses report using, and where a gap may remain.</p>
         </div>
         <div className="footer-links">
           <Link href="/about">About</Link>

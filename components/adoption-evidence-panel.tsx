@@ -5,15 +5,15 @@ export function AdoptionEvidencePanel({ actual }: { actual: LawFirmIndustryView[
     <section className="adoption-evidence" aria-labelledby="adoption-evidence-heading">
       <div className="section-heading section-heading--rule section-heading--split">
         <div>
-          <p className="eyebrow">Observed utilization</p>
-          <h2 id="adoption-evidence-heading">What law firms appear to be doing</h2>
+          <p className="eyebrow">What’s happening today</p>
+          <h2 id="adoption-evidence-heading">What the evidence says law firms are actually using</h2>
         </div>
-        <p>{actual.detail}</p>
+        <p>We found useful adoption research, but the studies don’t all measure the same thing. Some ask whether firms use AI at all, some ask how often they use it, and others look at the kinds of tools being used.</p>
       </div>
 
       <div className="adoption-note">
-        <strong>No combined Observed Utilization score yet.</strong>
-        <span>These percentages answer different questions. They are not averaged or subtracted from the Possible AI Utilization analysis.</span>
+        <strong>Why there is no combined score yet</strong>
+        <span>Rather than force different numbers into one score, AIBI shows them separately. {actual.detail}</span>
       </div>
 
       <div className="adoption-observation-list">

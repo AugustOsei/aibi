@@ -21,7 +21,7 @@ export default function UpdatesPage() {
       <header className="page-intro">
         <p className="eyebrow">AIBI updates</p>
         <h1>Follow how the index changes.</h1>
-        <p>AIBI is periodically reevaluated rather than treated as a permanent snapshot. Update notes will record meaningful changes to coverage, evidence, methods, and classifications.</p>
+        <p>AI capabilities, costs and adoption do not stand still, so AIBI is periodically reevaluated too. This is where we’ll record meaningful changes to country coverage, industry analysis, evidence, methods and classifications.</p>
       </header>
 
       <section className="updates-register" aria-labelledby="updates-register-heading">

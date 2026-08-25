@@ -70,8 +70,8 @@ function DevelopmentState({
           <CountryEvidencePanel evidence={countryEvidence} industrySlug={slug} />
         ) : (
           <section className="simple-usage-note">
-            <p>Observed utilization</p>
-            <h2>Choose a country to see available evidence.</h2>
+            <p>What’s happening today</p>
+            <h2>Choose a country to see what the available evidence reports.</h2>
             <span>A global industry-wide rate is not inferred from incompatible reports.</span>
           </section>
         )}
@@ -92,21 +92,21 @@ export default async function IndustryPage({ params, searchParams }: Props) {
     <>
       <IndustryAtlasHero
         name={view.name}
-        description="Explore where AI can accelerate legal work, connect firm operations and support complex analysis—while professional judgment and responsibility remain human."
+        description="AI in a law firm can mean something as simple as helping organize files or prepare client intake, or something much deeper, like connecting AI to firm systems or assisting with complex legal research. We’ve mapped those possibilities from easier-to-adopt uses through more integrated and advanced ones. Further down, you can also see what published research says law firms are actually using AI for today."
         archetype={view.archetypeName}
         countryName={countryContext?.name}
         evaluationLabel={`${view.possible.effectiveDate} · Baseline v${view.possible.version}`}
       />
       <div className="shell industry-content">
-        <WorkflowGroups groups={view.workflowGroups} />
+        <WorkflowGroups groups={view.workflowGroups} industryName={view.name} />
         {countryContext ? <CountryPracticalLens context={countryContext} /> : null}
         <AdoptionEvidencePanel actual={view.actual} />
         {countryEvidence ? (
           <CountryEvidencePanel evidence={countryEvidence} industrySlug={slug} />
         ) : (
           <section className="simple-usage-note">
-            <p>Country evidence</p>
-            <h2>Choose a country to add the closest official sector evidence.</h2>
+            <p>What’s happening today</p>
+            <h2>Choose a country to add the closest available official evidence.</h2>
             <span>The law-firm observations above remain visible because their published geographies are broader than one selected country.</span>
           </section>
         )}

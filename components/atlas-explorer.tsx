@@ -240,10 +240,15 @@ export function AtlasExplorer({
       <section className="journey shell" aria-labelledby="journey-heading">
         <header className="journey__intro">
           <div>
-            <p className="journey__eyebrow">Artificial Intelligence Business Index</p>
-            <h1 id="journey-heading">What could industries be doing with today’s AI?</h1>
+            <p className="journey__eyebrow">Welcome to AIBI</p>
+            <h1 id="journey-heading">AI has come a long way. So what can businesses actually use it for today?</h1>
           </div>
-          <p>Choose a country and industry. AIBI maps the full range of practical AI opportunity, then shows what credible evidence says businesses are actually doing.</p>
+          <div className="journey__intro-copy">
+            <p>That’s the question behind the Artificial Intelligence Business Index.</p>
+            <p>Choose a country and an industry, and AIBI will show you practical ways businesses in that industry could be using today’s AI—from simple everyday help to more integrated and advanced uses.</p>
+            <p>Where reliable data exists, we then look at what businesses report using AI for today and ask how large the gap is between what’s possible and what’s actually happening.</p>
+            <strong>Pick a country. Pick an industry. Start exploring.</strong>
+          </div>
         </header>
 
         <VisualFlow />
@@ -253,7 +258,7 @@ export function AtlasExplorer({
             <AsciiEarth activeSlug={selection.country?.slug} onSelect={selectCountry} />
             <div className="journey__globe-note" aria-live="polite">
               <span>Country</span>
-              <strong>{marketChosen ? selection.country?.name ?? "Global outlook" : "Choose on the globe or in step 1"}</strong>
+              <strong>{marketChosen ? selection.country?.name ?? "Global outlook" : "Pick on the globe or in step 1"}</strong>
             </div>
           </div>
 
@@ -299,7 +304,7 @@ export function AtlasExplorer({
             </label>
 
             <div className={`journey-spectrum${selection.industry ? "" : " is-locked"}`}>
-              <p><b>03</b> Explore AI utilization depth</p>
+              <p><b>03</b> See what AI can do</p>
               <div aria-label="The complete AI utilization spectrum">
                 <span><strong>Standard</strong><small>Accessible tools</small></span>
                 <i aria-hidden="true" />
@@ -307,7 +312,7 @@ export function AtlasExplorer({
                 <i aria-hidden="true" />
                 <span><strong>Advanced</strong><small>Human-led automation</small></span>
               </div>
-              <small>All three levels are included in one industry outlook.</small>
+              <small>Every industry outlook includes Standard, Integrated and Advanced uses.</small>
             </div>
 
             <div className={`journey__result${resultHref ? " is-ready" : ""}`} aria-live="polite">
@@ -320,13 +325,13 @@ export function AtlasExplorer({
                   <Link href={resultHref}>View industry outlook <b aria-hidden="true">↗</b></Link>
                 </>
               ) : (
-                <p className="journey__prompt">Choose a country and industry to view the complete outlook.</p>
+                <p className="journey__prompt">Pick a country and industry to start exploring.</p>
               )}
             </div>
           </form>
         </div>
 
-        <p className="journey__footnote">Possible utilization comes first. Observed utilization and the gap follow with source limitations kept visible.</p>
+        <p className="journey__footnote">First see what AI can do. Then review what the evidence says is happening—and whether the two can be compared honestly.</p>
       </section>
     </div>
   );

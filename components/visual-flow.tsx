@@ -84,11 +84,11 @@ function GapIllustration() {
 }
 
 const FLOW_STEPS = [
-  { number: "01", title: "Choose a country", detail: "Set the regional context.", Illustration: CountryIllustration },
-  { number: "02", title: "Choose an industry", detail: "Focus on the work that matters.", Illustration: IndustryIllustration },
-  { number: "03", title: "Explore utilization depth", detail: "Standard through advanced uses.", Illustration: LevelIllustration },
-  { number: "04", title: "Review observed use", detail: "See credible adoption evidence.", Illustration: UsesIllustration },
-  { number: "05", title: "Surface the gap", detail: "Compare only when evidence allows.", Illustration: GapIllustration },
+  { number: "01", title: "Pick a country", detail: "Start with the market you want to understand.", Illustration: CountryIllustration },
+  { number: "02", title: "Pick an industry", detail: "Choose the kind of business you want to explore.", Illustration: IndustryIllustration },
+  { number: "03", title: "See what AI can do", detail: "Explore simple, connected and advanced uses.", Illustration: LevelIllustration },
+  { number: "04", title: "See what businesses use", detail: "Read what surveys, studies and official data report.", Illustration: UsesIllustration },
+  { number: "05", title: "See the gap", detail: "Compare what’s possible with what appears to be happening.", Illustration: GapIllustration },
 ] as const;
 
 export function VisualFlow() {
@@ -96,7 +96,7 @@ export function VisualFlow() {
     <section className="visual-flow" aria-labelledby="visual-flow-heading">
       <header className="visual-flow__header">
         <p id="visual-flow-heading">How the index works</p>
-        <span>Possible AI utilization → observed utilization → gap.</span>
+        <span>Choose → explore what’s possible → review the evidence → see the gap.</span>
       </header>
       <ol>
         {FLOW_STEPS.map(({ number, title, detail, Illustration }) => (

@@ -20,14 +20,14 @@ export default function AboutPage() {
     <div className="shell page-shell about-page">
       <header className="page-intro about-intro">
         <p className="eyebrow">About AIBI</p>
-        <h1>A living view of what AI makes possible—and what industries appear to use.</h1>
-        <p>AIBI started from a simple question: given the capabilities of today&apos;s AI, what could businesses in an industry reasonably be using it for?</p>
+        <h1>Why AIBI starts with what AI can do today.</h1>
+        <p>AIBI began with a simple question: given the capabilities of today&apos;s AI, what could businesses in an industry reasonably be using it for?</p>
       </header>
 
       <section className="about-definition" aria-labelledby="about-definition-heading">
         <p className="eyebrow">The index</p>
         <h2 id="about-definition-heading">Industry opportunity first. Adoption evidence second.</h2>
-        <p>AIBI is an industry-level research project. It describes plausible uses across representative business work; it does not assess, rank, or diagnose individual businesses.</p>
+        <p>AIBI looks at industries, not individual companies. It maps practical uses across representative business work, then compares that picture with credible evidence of what is actually being adopted.</p>
       </section>
 
       <section className="about-layers" aria-label="How AIBI works">

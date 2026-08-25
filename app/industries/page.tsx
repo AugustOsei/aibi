@@ -16,9 +16,9 @@ export default function IndustriesPage() {
   return (
     <div className="shell page-shell">
       <header className="page-intro">
-        <p className="eyebrow">Industry index</p>
-        <h1>Where practical AI meets real business work.</h1>
-        <p>Each industry outlook starts with its functions and tasks, then tests current AI against the realities of cost, reliability, implementation, oversight, and risk.</p>
+        <p className="eyebrow">Explore industries</p>
+        <h1>Choose an industry. See what AI could help with today.</h1>
+        <p>Each outlook starts with the work businesses actually do. It then shows practical AI uses from simple everyday assistance to connected systems and more advanced, human-led applications.</p>
       </header>
       <section className="coverage-summary" aria-labelledby="industry-coverage-heading">
         <div><p className="eyebrow">Initial industry coverage</p><h2 id="industry-coverage-heading">The first set, not the finished index.</h2></div>
