@@ -94,6 +94,10 @@ Raw observations are immutable. Normalization creates a derived observation or s
 
 Values measuring unlike constructs—such as any AI use, generative-AI use, employee usage, firm adoption, expenditure, or task coverage—must not be averaged merely because each is expressed as a percentage.
 
+For Gap eligibility, a percentage additionally needs a declared mapping to the same business function, task/use case, Standard/Integrated/Advanced depth, and geography as Possible. It must measure task utilization or task coverage and carry the identical approved normalized-scale ID. Broad country/sector prevalence and tool-use frequency retain a null task/depth mapping and are never reclassified as direct task-level utilization.
+
+Proxy evidence remains identifiable in the comparison mapping and lowers a synthesized result's confidence by one qualitative level. Modeled evidence remains labeled modeled and lowers confidence by one additional level. Neither proxy nor modeled evidence contributes to the v0.1 numeric-coverage threshold.
+
 ## Avoiding false precision
 
 - Preserve source precision internally but publish only justified precision.

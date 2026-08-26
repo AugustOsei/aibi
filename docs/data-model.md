@@ -89,6 +89,8 @@ Source-level citation: `id`, title, publisher, URL, publication/access dates, so
 
 One extracted measurement: `id`, `sourceId`, source locator/question wording, observation period, geography, source category and mapped industry/archetype/firm size, sample metadata, AI definition, denominator, measured concept, unit, discriminated value state, provenance (`observed`, `inherited`, `modeled`), evidence assessment, confidence, methodology/extraction notes, lineage, and timestamps.
 
+Every observation also carries an `ActualComparisonMapping`: nullable business-function and task IDs, nullable utilization depth (`standard`, `integrated`, `advanced`), direct/proxy relation for the intended comparison, geography, evidence confidence, observed/modeled basis, measured-construct classification, nullable normalized-scale ID, and mapping rationale. Null task/depth fields mean “not reported at this level,” not zero. Broad sector observations are deliberately represented this way.
+
 An inherited observation references its parent observation and explains mismatches. A modeled observation references a model version and all inputs. A missing observation contains a reason rather than a numeric value.
 
 ### `adoption_scores`
@@ -99,7 +101,7 @@ Immutable normalized output: `id`, segment scope, observation period/as-of date,
 
 ### `gap_scores`
 
-`id`, exact `baselineScoreId`, `adoptionScoreId` when present, segment scope, gap status (`calculated`, `missing_adoption`, `not_comparable`), numeric result only when calculated, compatibility checks, confidence, score version, calculation timestamp, and notes.
+`id`, exact `baselineScoreId`, `adoptionScoreId` when present, segment scope, gap status (`numeric`, `directional`, `insufficient`), numeric value only for a numeric result, direction only for a directional result, explicit reason code for an insufficient result, compatibility checks, evidence coverage, confidence, score version, calculation timestamp, and notes.
 
 ### `confidence_evidence_metadata`
 
@@ -145,9 +147,10 @@ There is deliberately no edge from adoption observations/scores to capability ve
 5. An observation with `missing` value contains no numeric value.
 6. Inherited provenance requires a parent observation and inheritance rationale.
 7. Modeled provenance requires a model version, input references, and method description.
-8. A calculated gap requires numeric baseline and adoption inputs plus successful compatibility checks.
-9. A missing or non-comparable input yields no numeric gap.
-10. Supersession appends history and never mutates the historical score.
+8. A numeric gap requires task/depth/geography-aligned Possible and Actual point values on the same declared normalized scale plus minimum direct evidence coverage.
+9. A directional gap requires deterministic thresholds and minimum aligned evidence coverage; a missing or incompatible input yields an `insufficient` result with no value or direction.
+10. Broad country or sector adoption prevalence is never a direct task-level utilization observation.
+11. Supersession appends history and never mutates the historical score.
 
 ## Seed-data boundary
 

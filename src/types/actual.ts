@@ -9,6 +9,7 @@ import type {
   QuantitativeValue,
   ScoreResult,
 } from "./common.js";
+import type { ActualComparisonMapping } from "./scoring.js";
 
 export interface AdoptionSource {
   id: EntityId;
@@ -94,6 +95,7 @@ export interface AdoptionObservation {
   provenance: ObservationProvenance;
   evidence: EvidenceAssessment;
   confidence: Confidence;
+  comparison: ActualComparisonMapping;
   extractionNotes?: string;
   extractedBy?: string;
   reviewedBy?: string;

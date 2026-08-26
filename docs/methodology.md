@@ -121,14 +121,25 @@ The types deliberately do not prescribe final factor weights or aggregation form
 
 ## Comparability and gap calculation
 
-A gap calculation must confirm that both scores align on:
+AIBI v0.1 compares a portfolio of shared cells rather than subtracting an industry-wide Possible score from an unrelated adoption percentage. Each cell is keyed by business function, task/use case, utilization depth (`standard`, `integrated`, or `advanced`), and geography. For the scored law-firm baseline, Standard means practicality at least 65 with a partial/mostly-automation role; Integrated means at least 45 with that role; all other tasks are Advanced and human-led. Actual evidence uses the same depth vocabulary and also records whether it is direct or proxy evidence, its confidence, whether it is observed or modeled, the measured construct, and a normalized-scale identifier when normalization is defensible.
 
-- country, industry/archetype, and firm-size scope;
+A gap calculation must confirm that both sides align on:
+
+- business function, task/use case, utilization depth, and geography;
+- country, industry/archetype, and firm-size scope where applicable;
 - effective or observation period acceptable to the score version;
-- unit, scale, and construct being measured; and
+- unit, normalized scale, and task-utilization construct; and
 - compatible score versions or an explicit crosswalk.
 
-If any required alignment fails, the gap status is `not_comparable`. If actual utilization is missing, the gap status is `missing_adoption`. Neither condition may produce a numeric gap.
+The v0.1 result rules are deterministic:
+
+- **Numeric:** directly observed, task-aligned point estimates on the identical declared 0–100 utilization scale; evidence grade A or B; known confidence; and at least 75% of the weighted Possible task set covered by qualifying Actual evidence. The weighted Possible-minus-Actual difference is reported in percentage points. Proxy or modeled cells do not count toward numeric coverage.
+- **Directional:** numeric rules are not met, but aligned task-utilization evidence on the same declared scale has grade C or better, known confidence, and covers at least 50% of the weighted task set. A weighted difference of at least 40 points is `High`, at least 20 is `Moderate`, and less than 20 is `Low`. These are classification thresholds, not published numeric estimates.
+- **Insufficient:** Possible is missing or not normalized, Actual is missing, the evidence is not task/depth/geography aligned, scales or constructs are incompatible, or comparable coverage is below 50%. Missing values are never replaced with zero.
+
+For multiple observations mapped to the same cell, selection is reproducible: direct precedes proxy, observed precedes modeled, then higher evidence grade, higher confidence, and finally stable observation ID. Any contributing proxy evidence lowers result confidence by one level; modeled evidence lowers it by one additional level.
+
+Broad country or sector percentages measuring “any AI use,” product use, or use frequency are `broad_adoption_prevalence` or `tool_use_frequency`. They retain their source value and industry mapping but have null task/depth coordinates and no normalized task-utilization scale. They can provide context; they can never be treated as direct task-level utilization or create a Gap.
 
 ## Reproducibility and change management
 

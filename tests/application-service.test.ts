@@ -1,9 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { getCountryEvidence, getCountrySummaries, getIndustrySummaries, getLawFirmIndustryView } from "../src/application/aibi-service.js";
+import { getCountryEvidence, getCountrySummaries, getIndustryGapAssessment, getIndustrySummaries, getLawFirmIndustryView } from "../src/application/aibi-service.js";
 import { calculateLawFirmBaseline } from "../src/possible/law-firm-baseline.js";
-import { COUNTRY_PRACTICAL_CONTEXTS, INDUSTRY_OUTLOOKS } from "../src/data/industry-outlooks.js";
+import { COUNTRY_PRACTICAL_CONTEXTS, INDUSTRY_OUTLOOKS, getCountryPracticalContext } from "../src/data/industry-outlooks.js";
 
 test("Law Firm view model gets Possible directly from the baseline engine", () => {
   const view = getLawFirmIndustryView();
@@ -15,15 +15,23 @@ test("Law Firm view model gets Possible directly from the baseline engine", () =
   );
 });
 
-test("partial Actual and missing Gap remain explicit null states, never zero", () => {
+test("partial Actual and insufficient Gap remain explicit null states, never zero", () => {
   const view = getLawFirmIndustryView();
   assert.equal(view.actual.status, "partial");
   assert.equal(view.actual.value, null);
   assert.equal(view.actual.observations.length, 4);
-  assert.equal(view.gap.status, "insufficient_evidence");
+  assert.equal(view.gap.status, "insufficient");
   assert.equal(view.gap.value, null);
   assert.notEqual(view.actual.value, 0);
   assert.notEqual(view.gap.value, 0);
+});
+
+test("every current industry explains why its Gap is insufficient", () => {
+  for (const industry of getIndustrySummaries()) {
+    const gap = getIndustryGapAssessment(industry.slug, "united-states");
+    assert.equal(gap.status, "insufficient");
+    assert.ok(gap.explanation.length > 80);
+  }
 });
 
 test("law-firm adoption observations remain separate, sourced constructs", () => {
@@ -54,8 +62,10 @@ test("every unscored industry has a complete three-level capability outlook", ()
   assert.equal(INDUSTRY_OUTLOOKS.length, 7);
   assert.ok(INDUSTRY_OUTLOOKS.every(({ tiers, sources }) => tiers.length === 3 && sources.length >= 2));
   assert.ok(INDUSTRY_OUTLOOKS.every(({ tiers }) => tiers.every(({ useCases }) => useCases.length === 4)));
-  assert.equal(COUNTRY_PRACTICAL_CONTEXTS.length, 4);
+  assert.equal(COUNTRY_PRACTICAL_CONTEXTS.length, 3);
   assert.ok(COUNTRY_PRACTICAL_CONTEXTS.every(({ factors, sources }) => factors.length === 3 && sources.length > 0));
+  assert.equal(COUNTRY_PRACTICAL_CONTEXTS.some(({ slug }) => slug === "united-states"), false);
+  assert.equal(getCountryPracticalContext("united-states"), undefined);
 });
 
 test("country evidence preserves official sector values and transparent mappings", () => {

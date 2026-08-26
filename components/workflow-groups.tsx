@@ -3,7 +3,7 @@ import { AiDepthNavigator } from "./ai-depth-navigator";
 
 export function WorkflowGroups({ groups, industryName }: { groups: WorkflowGroupView[]; industryName: string }) {
   const levels = groups.map((group) => ({
-    id: group.id === "common-sense" ? "standard" : group.id === "deeper-integration" ? "integrated" : "advanced",
+    id: group.id,
     title: group.title,
     description: group.description,
     items: group.tasks.map((task) => ({

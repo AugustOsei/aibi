@@ -1,4 +1,6 @@
-export type OutlookTierId = "standard" | "integrated" | "advanced";
+import type { UtilizationDepth } from "../types/scoring.js";
+
+export type OutlookTierId = UtilizationDepth;
 
 export interface IndustryUseCase {
   id: string;
@@ -279,20 +281,9 @@ export const INDUSTRY_OUTLOOKS: IndustryOutlook[] = [
 
 export const COUNTRY_PRACTICAL_CONTEXTS: CountryPracticalContext[] = [
   {
-    slug: "united-states",
-    name: "United States",
-    framing: "The technical use cases remain available, but deployment should be governed by sector rules, state law and a documented risk process.",
-    factors: [
-      { title: "Govern by use case", detail: "Apply the NIST Govern, Map, Measure and Manage functions proportionately to the impact of each workflow." },
-      { title: "Keep sector obligations", detail: "Professional, health, employment, consumer and privacy duties still apply when AI assists the work." },
-      { title: "Test before scale", detail: "Evaluate accuracy, harmful bias, security, privacy and human fallback using representative local inputs." },
-    ],
-    sources: [{ ...nist, title: "Artificial Intelligence Risk Management Framework (AI RMF 1.0)", url: "https://doi.org/10.6028/NIST.AI.100-1" }],
-  },
-  {
     slug: "united-kingdom",
     name: "United Kingdom",
-    framing: "AI workflows using personal data need a lawful, fair and transparent design under the UK data-protection regime, with extra care around consequential decisions.",
+    framing: "In the UK, workflows using personal data need a lawful, fair and transparent design, with extra care around consequential decisions.",
     factors: [
       { title: "Establish a lawful basis", detail: "Define purpose, necessity and lawful processing before supplying personal data to an AI system." },
       { title: "Minimise and explain", detail: "Use only necessary data and be able to explain significant AI-assisted processes and decisions to affected people." },
@@ -303,7 +294,7 @@ export const COUNTRY_PRACTICAL_CONTEXTS: CountryPracticalContext[] = [
   {
     slug: "canada",
     name: "Canada",
-    framing: "The opportunity set is similar, but organizations need accountable handling of personal information under applicable federal and provincial privacy requirements.",
+    framing: "In Canada, organizations need accountable handling of personal information under the federal or provincial privacy requirements that apply to them.",
     factors: [
       { title: "Accountability follows the data", detail: "The organization remains responsible for personal information handled by AI providers and connected systems." },
       { title: "Purpose and consent matter", detail: "Define appropriate purposes, use meaningful consent where required and avoid secondary use that people would not reasonably expect." },
@@ -314,7 +305,7 @@ export const COUNTRY_PRACTICAL_CONTEXTS: CountryPracticalContext[] = [
   {
     slug: "ghana",
     name: "Ghana",
-    framing: "The same AI capabilities can be useful, but practical deployment should prioritize local relevance, connectivity-aware workflows, skills and Ghana's evolving governance framework.",
+    framing: "In Ghana, implementation should account for local language and data relevance, connectivity, staff skills and the country’s evolving AI governance framework.",
     factors: [
       { title: "Localize the system", detail: "Test language, examples, terminology and user experience for Ghanaian markets rather than assuming foreign defaults transfer cleanly." },
       { title: "Design for operating reality", detail: "Offer low-bandwidth fallbacks, clear manual continuation and workflows that do not collapse when cloud access is interrupted." },
@@ -328,4 +319,6 @@ export const COUNTRY_PRACTICAL_CONTEXTS: CountryPracticalContext[] = [
 ];
 
 export const getIndustryOutlook = (slug: string) => INDUSTRY_OUTLOOKS.find((outlook) => outlook.slug === slug);
-export const getCountryPracticalContext = (slug: string) => COUNTRY_PRACTICAL_CONTEXTS.find((context) => context.slug === slug);
+export const getCountryPracticalContext = (slug: string) => COUNTRY_PRACTICAL_CONTEXTS.find(
+  (context) => context.slug === slug && context.factors.length > 0 && context.sources.length > 0,
+);

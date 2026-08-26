@@ -1,6 +1,8 @@
 import type { CountryPracticalContext, IndustryOutlook } from "../src/data/industry-outlooks";
 import { AiDepthNavigator } from "./ai-depth-navigator";
 
+const countryInSentence = (name: string) => ["United Kingdom", "United States"].includes(name) ? `the ${name}` : name;
+
 export function IndustryCapabilityOutlook({
   outlook,
   countryContext,
@@ -40,20 +42,28 @@ export function IndustryCapabilityOutlook({
         </details>
       </section>
 
-      {countryContext ? <CountryPracticalLens context={countryContext} /> : null}
+      {countryContext ? <CountryPracticalLens context={countryContext} industryName={outlook.name} /> : null}
     </>
   );
 }
 
-export function CountryPracticalLens({ context }: { context: CountryPracticalContext }) {
+export function CountryPracticalLens({
+  context,
+  industryName,
+}: {
+  context: CountryPracticalContext;
+  industryName: string;
+}) {
+  if (context.factors.length === 0 || context.sources.length === 0) return null;
+  const sentenceCountry = countryInSentence(context.name);
   return (
     <section className="practical-lens" aria-labelledby={`practical-lens-${context.slug}`}>
       <header>
-        <p className="eyebrow">Deployment context · {context.name}</p>
-        <h2 id={`practical-lens-${context.slug}`}>Deployment context in {context.name}</h2>
-        <p>{context.framing}</p>
+        <p className="eyebrow">Country considerations</p>
+        <h2 id={`practical-lens-${context.slug}`}>Using AI in {context.name}</h2>
+        <p>The opportunities above show what {industryName.toLowerCase()} could do with today’s AI tools. This section highlights a few country-specific factors that may shape how those ideas are put into practice in {sentenceCountry}—including privacy rules, local business conditions, infrastructure, tool availability, language, or sector constraints. {context.framing}</p>
       </header>
-      <p className="practical-lens__disclaimer">This context does not currently change the Possible AI Utilization analysis or any experimental score.</p>
+      <p className="practical-lens__disclaimer"><span>Method note</span> For now, these local factors are guidance only; they do not change the Possible analysis.</p>
       <div className="practical-lens__factors">
         {context.factors.map((factor, index) => (
           <article key={factor.title}>
@@ -64,7 +74,7 @@ export function CountryPracticalLens({ context }: { context: CountryPracticalCon
         ))}
       </div>
       <footer>
-        <span>Country basis</span>
+        <span>Sources</span>
         {context.sources.map((source) => (
           <a href={source.url} target="_blank" rel="noreferrer" key={source.url}>{source.publisher}: {source.title} ↗</a>
         ))}

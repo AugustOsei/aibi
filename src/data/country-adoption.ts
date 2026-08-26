@@ -19,6 +19,7 @@ export interface CountrySectorAdoptionObservation {
   mappingNote: string;
   evidenceGrade: "A" | "B";
   confidence: "High" | "Medium";
+  comparison: ActualComparisonMapping;
   derivation?: string;
 }
 
@@ -84,7 +85,7 @@ const mappings = {
   },
 };
 
-type ObservationSeed = Omit<CountrySectorAdoptionObservation, "id" | "countryId" | "sourceId" | "measuredConcept" | "evidenceGrade" | "confidence">;
+type ObservationSeed = Omit<CountrySectorAdoptionObservation, "id" | "countryId" | "sourceId" | "measuredConcept" | "evidenceGrade" | "confidence" | "comparison">;
 
 const makeObservations = (
   countryId: string,
@@ -101,6 +102,21 @@ const makeObservations = (
   measuredConcept: metric,
   evidenceGrade,
   confidence,
+  comparison: {
+    businessFunctionId: null,
+    taskId: null,
+    utilizationDepth: null,
+    evidenceRelation: "proxy",
+    geography: { level: "country", geographyId: countryId, label: countryId },
+    evidenceConfidence: {
+      level: confidence.toLowerCase() as "high" | "medium",
+      rationale: "Confidence applies to the published broad-sector estimate, not to a task-level industry estimate.",
+    },
+    estimateBasis: "observed",
+    measure: "broad_adoption_prevalence",
+    normalizedScaleId: null,
+    mappingRationale: "The source reports broad sector prevalence and no business-function, task, or utilization-depth breakdown; the industry link is proxy context only.",
+  },
 }));
 
 export const COUNTRY_SECTOR_ADOPTION_OBSERVATIONS: CountrySectorAdoptionObservation[] = [
@@ -152,3 +168,4 @@ export const COUNTRY_SECTOR_ADOPTION_OBSERVATIONS: CountrySectorAdoptionObservat
 ];
 
 export const GHANA_EVIDENCE_NOTE = "No recent national source was found that reports a comparable current AI-use rate for the planned AIBI industries. The World Bank's nationally representative 2021 Firm Adoption of Technology survey is retained as reviewed context, but it is not presented as a current adoption percentage.";
+import type { ActualComparisonMapping } from "../types/scoring.js";

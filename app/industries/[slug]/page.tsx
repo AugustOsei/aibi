@@ -14,7 +14,9 @@ import {
   getIndustrySummaries,
   getIndustrySummary,
   getCountryEvidence,
+  getIndustryGapAssessment,
   getLawFirmIndustryView,
+  getCountrySummary,
 } from "../../../src/application/aibi-service";
 import { getCountryPracticalContext, getIndustryOutlook } from "../../../src/data/industry-outlooks";
 import { createPageMetadata } from "../../../src/config/site";
@@ -56,13 +58,15 @@ function DevelopmentState({
   if (!outlook) notFound();
   const countryEvidence = countrySlug ? getCountryEvidence(countrySlug) : undefined;
   const countryContext = countrySlug ? getCountryPracticalContext(countrySlug) : undefined;
+  const selectedCountry = countrySlug ? getCountrySummary(countrySlug) : undefined;
   return (
     <>
       <IndustryAtlasHero
         name={industry.name}
         description={outlook.framing}
         archetype={outlook.archetype}
-        countryName={countryContext?.name}
+        countryName={selectedCountry?.name}
+        countryCode={selectedCountry?.iso2}
       />
       <div className="shell industry-content">
         <IndustryCapabilityOutlook outlook={outlook} countryContext={countryContext} />
@@ -75,7 +79,7 @@ function DevelopmentState({
             <span>A global industry-wide rate is not inferred from incompatible reports.</span>
           </section>
         )}
-        <UtilizationGapPanel reason="The possible-utilization outlook describes tasks and workflows, while current country evidence measures broader sectors or differently defined forms of AI use. Missing or incompatible evidence is not treated as zero." />
+        <UtilizationGapPanel gap={getIndustryGapAssessment(slug, countrySlug)} />
       </div>
     </>
   );
@@ -88,18 +92,20 @@ export default async function IndustryPage({ params, searchParams }: Props) {
   const view = getLawFirmIndustryView();
   const countryEvidence = countrySlug ? getCountryEvidence(countrySlug) : undefined;
   const countryContext = countrySlug ? getCountryPracticalContext(countrySlug) : undefined;
+  const selectedCountry = countrySlug ? getCountrySummary(countrySlug) : undefined;
   return (
     <>
       <IndustryAtlasHero
         name={view.name}
         description="AI in a law firm can mean something as simple as helping organize files or prepare client intake, or something much deeper, like connecting AI to firm systems or assisting with complex legal research. We’ve mapped those possibilities from easier-to-adopt uses through more integrated and advanced ones. Further down, you can also see what published research says law firms are actually using AI for today."
         archetype={view.archetypeName}
-        countryName={countryContext?.name}
+        countryName={selectedCountry?.name}
+        countryCode={selectedCountry?.iso2}
         evaluationLabel={`${view.possible.effectiveDate} · Baseline v${view.possible.version}`}
       />
       <div className="shell industry-content">
         <WorkflowGroups groups={view.workflowGroups} industryName={view.name} />
-        {countryContext ? <CountryPracticalLens context={countryContext} /> : null}
+        {countryContext ? <CountryPracticalLens context={countryContext} industryName={view.name} /> : null}
         <AdoptionEvidencePanel actual={view.actual} />
         {countryEvidence ? (
           <CountryEvidencePanel evidence={countryEvidence} industrySlug={slug} />
@@ -110,7 +116,7 @@ export default async function IndustryPage({ params, searchParams }: Props) {
             <span>The law-firm observations above remain visible because their published geographies are broader than one selected country.</span>
           </section>
         )}
-        <UtilizationGapPanel reason="The opportunity analysis is task-level, while observed reports measure tool use, frequency, or broad-sector adoption. Those constructs cannot be subtracted honestly, so no numeric gap is shown." />
+        <UtilizationGapPanel gap={getIndustryGapAssessment(slug, countrySlug)} />
         <ResearchDrawer label="See experimental scoring and methodology">
           <div className="score-explainer">
             <p className="eyebrow">About the experimental index</p>

@@ -7,6 +7,7 @@ import { LAW_FIRM_ADOPTION_OBSERVATIONS, LAW_FIRM_ADOPTION_SOURCES } from "../da
 import { LAW_FIRM_ARCHETYPE, LAW_FIRM_TASKS } from "../data/law-firm-model";
 import { getIndustryOutlook } from "../data/industry-outlooks";
 import { calculateLawFirmBaseline } from "../possible/law-firm-baseline";
+import type { UtilizationDepth } from "../types/scoring";
 
 export type DataStatus = "available" | "partial" | "insufficient_evidence" | "in_development";
 
@@ -68,6 +69,7 @@ export interface TaskBaselineView {
   name: string;
   description: string;
   practicality: number;
+  utilizationDepth: UtilizationDepth;
   role: string;
   roleLabel: string;
   humanBoundary: string;
@@ -84,11 +86,16 @@ export interface FunctionBaselineView {
 }
 
 export interface WorkflowGroupView {
-  id: "common-sense" | "deeper-integration" | "human-led";
+  id: UtilizationDepth;
   title: string;
   description: string;
   tasks: Array<Pick<TaskBaselineView, "id" | "name" | "description" | "practicality" | "roleLabel" | "humanBoundary">>;
 }
+
+export type IndustryGapView =
+  | { status: "numeric"; value: number; unit: "percentage_points"; label: string; explanation: string }
+  | { status: "directional"; direction: "High" | "Moderate" | "Low"; value: null; label: string; explanation: string }
+  | { status: "insufficient"; value: null; label: "Insufficient evidence"; explanation: string };
 
 export interface AdoptionObservationView {
   id: string;
@@ -126,11 +133,7 @@ export interface LawFirmIndustryView {
     detail: string;
     observations: AdoptionObservationView[];
   };
-  gap: {
-    status: "insufficient_evidence";
-    value: null;
-    label: "Pending adoption data";
-  };
+  gap: IndustryGapView;
   functions: FunctionBaselineView[];
   workflowGroups: WorkflowGroupView[];
 }
@@ -181,6 +184,12 @@ const publicFactorLabel = (factor: string) => {
   return internalName ? factor.replace(internalName, PUBLIC_FACTOR_LABELS[internalName] ?? internalName) : factor;
 };
 
+const taskUtilizationDepth = (practicality: number, role: string): UtilizationDepth => {
+  if (practicality >= 65 && ["partially_automate", "mostly_automate"].includes(role)) return "standard";
+  if (practicality >= 45 && ["partially_automate", "mostly_automate"].includes(role)) return "integrated";
+  return "advanced";
+};
+
 const industries: IndustrySummaryView[] = archetypeSeeds.map((seed) => {
   const presentation = INDUSTRY_PRESENTATION[seed.slug];
   if (!presentation) throw new Error(`Missing industry presentation for ${seed.slug}`);
@@ -215,6 +224,25 @@ export const getIndustrySummaries = (): IndustrySummaryView[] => industries.map(
 export const getCountrySummaries = (): CountrySummaryView[] => countries.map((country) => ({ ...country }));
 export const getIndustrySummary = (slug: string) => getIndustrySummaries().find((industry) => industry.slug === slug);
 export const getCountrySummary = (slug: string) => getCountrySummaries().find((country) => country.slug === slug);
+
+export const getIndustryGapAssessment = (industrySlug: string, countrySlug?: string): IndustryGapView => {
+  const industry = getIndustrySummary(industrySlug);
+  if (!industry) throw new Error(`Unknown industry ${industrySlug}`);
+  const countryEvidence = countrySlug ? getCountryEvidence(countrySlug) : undefined;
+  if (industrySlug === "law-firms") {
+    return {
+      status: "insufficient", value: null, label: "Insufficient evidence",
+      explanation: "The current Possible result is a task-practicality index, while the law-firm Actual observations measure respondent or firm tool use and frequency without task or depth allocation. Their scales are incompatible; broad country-sector percentages remain proxy context and cannot fill the task-level evidence requirement.",
+    };
+  }
+  const actualState = countryEvidence?.observations.length
+    ? "The selected country evidence is broad-sector adoption prevalence with no business-function, task, or depth breakdown."
+    : "No task-aligned Actual observation is available for the selected scope.";
+  return {
+    status: "insufficient", value: null, label: "Insufficient evidence",
+    explanation: `Possible is currently a qualitative Standard / Integrated / Advanced outlook rather than a normalized utilization scale. ${actualState} Neither side supplies compatible task-level values with enough coverage.`,
+  };
+};
 
 export const getCountryEvidence = (slug: string): CountryEvidenceView | undefined => {
   const country = getCountrySummary(slug);
@@ -271,6 +299,7 @@ export const getLawFirmIndustryView = (): LawFirmIndustryView => {
         name: task.taskName,
         description: taskModel.description,
         practicality: task.practicality,
+        utilizationDepth: taskUtilizationDepth(task.practicality, task.recommendedRole),
         role: task.recommendedRole,
         roleLabel: roleLabel(task.recommendedRole),
         humanBoundary: taskModel.roleRationale,
@@ -303,21 +332,21 @@ export const getLawFirmIndustryView = (): LawFirmIndustryView => {
   const allTasks = functions.flatMap((businessFunction) => businessFunction.tasks);
   const workflowGroups: WorkflowGroupView[] = [
     {
-      id: "common-sense", title: "Standard AI",
+      id: "standard", title: "Standard AI",
       description: "Mature, accessible assistance and bounded automation available with today’s mainstream tools.",
-      tasks: allTasks.filter((task) => task.practicality >= 65 && ["partially_automate", "mostly_automate"].includes(task.role))
+      tasks: allTasks.filter((task) => task.utilizationDepth === "standard")
         .map(({ id, name, description, practicality, roleLabel: label, humanBoundary }) => ({ id, name, description, practicality, roleLabel: label, humanBoundary })),
     },
     {
-      id: "deeper-integration", title: "Integrated AI",
+      id: "integrated", title: "Integrated AI",
       description: "Useful workflows that need stronger systems integration, organizational readiness, controls, or professional review.",
-      tasks: allTasks.filter((task) => task.practicality >= 45 && task.practicality < 65 && ["partially_automate", "mostly_automate"].includes(task.role))
+      tasks: allTasks.filter((task) => task.utilizationDepth === "integrated")
         .map(({ id, name, description, practicality, roleLabel: label, humanBoundary }) => ({ id, name, description, practicality, roleLabel: label, humanBoundary })),
     },
     {
-      id: "human-led", title: "Advanced & human-led AI",
+      id: "advanced", title: "Advanced & human-led AI",
       description: "AI may prepare, organize, simulate, or challenge high-complexity work, while legal responsibility and judgment remain decisively human.",
-      tasks: allTasks.filter((task) => ["assist", "augment", "not_practically_appropriate"].includes(task.role) || task.practicality < 45)
+      tasks: allTasks.filter((task) => task.utilizationDepth === "advanced")
         .map(({ id, name, description, practicality, roleLabel: label, humanBoundary }) => ({ id, name, description, practicality, roleLabel: label, humanBoundary })),
     },
   ];
@@ -368,7 +397,7 @@ export const getLawFirmIndustryView = (): LawFirmIndustryView => {
       detail: "Direct adoption observations are available, but they measure different constructs—tool use, use frequency, and tool type. They cannot yet be normalized into a task-coverage score comparable with Possible.",
       observations: adoptionObservations,
     },
-    gap: { status: "insufficient_evidence", value: null, label: "Pending adoption data" },
+    gap: getIndustryGapAssessment("law-firms"),
     functions, workflowGroups,
   };
 };
