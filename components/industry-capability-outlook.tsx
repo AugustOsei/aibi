@@ -1,5 +1,7 @@
 import type { CountryPracticalContext, IndustryOutlook } from "../src/data/industry-outlooks";
 import { AiDepthNavigator } from "./ai-depth-navigator";
+import { CapabilityHorizon } from "./capability-horizon";
+import { CommonBusinessFunctions } from "./common-business-functions";
 
 const countryInSentence = (name: string) => ["United Kingdom", "United States"].includes(name) ? `the ${name}` : name;
 
@@ -25,6 +27,8 @@ export function IndustryCapabilityOutlook({
   return (
     <section className="capability-outlook" aria-labelledby="capability-outlook-heading">
         <h2 id="capability-outlook-heading" className="sr-only">Complete possible AI utilization spectrum</h2>
+        <CapabilityHorizon />
+        <CommonBusinessFunctions countryName={countryContext?.name} />
         <AiDepthNavigator
           levels={levels}
           industryName={outlook.name}
@@ -37,7 +41,7 @@ export function IndustryCapabilityOutlook({
 
         <details className="capability-basis">
           <summary>Research basis and limitations</summary>
-          <p>This is a qualitative capability outlook, not an adoption claim or a completed numeric baseline. Use cases combine the industry&apos;s work with today&apos;s language, voice, vision, predictive, connected-workflow and agentic capabilities. Country guidance shapes the practical path, but does not alter the underlying global capability assessment.</p>
+          <p>This is a qualitative capability outlook, not an adoption claim or a completed numeric baseline. The dated capability horizon feeds both the common business functions and the industry-specific work above. Country guidance shapes the practical implementation path, but does not alter the underlying global capability assessment.</p>
           <ul>
             {outlook.sources.map((source) => (
               <li key={source.url}>

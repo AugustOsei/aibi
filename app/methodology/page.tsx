@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { createPageMetadata } from "../../src/config/site";
+import { AI_CAPABILITY_HORIZON, COMMON_BUSINESS_FUNCTIONS } from "../../src/data/ai-capability-horizon";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Methodology",
@@ -39,6 +40,21 @@ export default function MethodologyPage() {
           <li><strong>Advanced AI</strong> covers continuous, multimodal or agentic systems that can plan and prepare actions across tools, with approval gates and accountable people.</li>
           <li>Voice, vision or multimodal generation is not automatically Advanced. Depth depends on integration, autonomy, risk and operational control.</li>
           <li>Country guidance describes the practical implementation path for the selected industry; it does not change the underlying global capability assessment.</li>
+        </ul>
+      </section>
+      <section className="method-principles" aria-labelledby="capability-horizon-method">
+        <div>
+          <p className="eyebrow">Capability horizon · {AI_CAPABILITY_HORIZON.version}</p>
+          <h2 id="capability-horizon-method">A dated view of what businesses can use now.</h2>
+          <p>Effective <time dateTime={AI_CAPABILITY_HORIZON.effectiveDate}>August 27, 2026</time>.</p>
+        </div>
+        <ul>
+          <li>The horizon covers reasoning, language, documents, voice, vision, image and video creation, data and code, computer use, connected agents and selected physical AI.</li>
+          <li>Product names are evidence of capability, not the taxonomy. A capability remains in the model even as vendors and models change.</li>
+          <li>The same {COMMON_BUSINESS_FUNCTIONS.length} common business functions are considered for every country and industry: marketing, sales, service, administration, people, operations, technology and risk.</li>
+          <li>Industry-specific opportunities are added separately, so specialist work does not crowd out the functions nearly every business performs.</li>
+          <li>Country guidance then describes practical constraints such as privacy, infrastructure, language, cost and sector rules; it does not pretend the underlying technology is different by country.</li>
+          <li>This snapshot is reviewed and timestamped because capability, price, reliability and availability change.</li>
         </ul>
       </section>
       <section className="method-stages">

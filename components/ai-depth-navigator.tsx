@@ -58,25 +58,10 @@ export function AiDepthNavigator({
   return (
     <section id="possible-utilization" className="simple-ai-guide" aria-labelledby={`${instanceId}-heading`}>
       <header className="simple-ai-guide__header">
-        <p>What’s possible today</p>
-        <h2 id={`${instanceId}-heading`}>How {industryName.toLowerCase()} can use AI—from simple help to deeper integration</h2>
-        <span>We’ve grouped the opportunities into three levels. Together, they show the range of practical AI use available to {industryName.toLowerCase()} today.</span>
+        <p>Specific to this industry</p>
+        <h2 id={`${instanceId}-heading`}>Where AI meets {industryName.toLowerCase()} work.</h2>
+        <span>These opportunities focus on the industry’s distinctive workflows. Move through the three levels to see how the same work changes as AI gains approved data, system access and bounded autonomy.</span>
       </header>
-
-      <div className="ai-capability-range" aria-label="AI capabilities available today">
-        <div>
-          <p>Today’s AI range</p>
-          <span>Technology type does not determine the level by itself. Voice or vision can be Standard; autonomy and system access create the deeper implementation.</span>
-        </div>
-        <ul>
-          <li>Language & documents</li>
-          <li>Voice & conversation</li>
-          <li>Vision & multimodal</li>
-          <li>Prediction & optimization</li>
-          <li>Connected workflows</li>
-          <li>Agentic systems</li>
-        </ul>
-      </div>
 
       <div className="simple-level-tabs" role="tablist" aria-label="AI utilization level">
         {levels.map((level, index) => {

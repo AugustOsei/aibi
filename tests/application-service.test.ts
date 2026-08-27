@@ -4,6 +4,7 @@ import test from "node:test";
 import { getCountryEvidence, getCountrySummaries, getIndustryAdoptionHeadroom, getIndustryGapAssessment, getIndustrySummaries, getLawFirmIndustryView } from "../src/application/aibi-service.js";
 import { calculateLawFirmBaseline } from "../src/possible/law-firm-baseline.js";
 import { COUNTRY_PRACTICAL_CONTEXTS, INDUSTRY_OUTLOOKS, getCountryPracticalContext } from "../src/data/industry-outlooks.js";
+import { AI_CAPABILITY_HORIZON, COMMON_BUSINESS_FUNCTIONS } from "../src/data/ai-capability-horizon.js";
 
 test("Law Firm view model gets Possible directly from the baseline engine", () => {
   const view = getLawFirmIndustryView();
@@ -68,6 +69,33 @@ test("every industry has a complete three-level current-capability outlook", () 
   assert.ok(COUNTRY_PRACTICAL_CONTEXTS.every(({ tierGuidance }) => Object.keys(tierGuidance).join(",") === "standard,integrated,advanced"));
   assert.ok(COUNTRY_PRACTICAL_CONTEXTS.every(({ industryNotes }) => getIndustrySummaries().every(({ slug }) => Boolean(industryNotes[slug]))));
   assert.ok(getCountryPracticalContext("united-states"));
+});
+
+test("the dated capability horizon covers current multimodal and agentic AI", () => {
+  assert.equal(AI_CAPABILITY_HORIZON.version, "2026.08");
+  assert.equal(AI_CAPABILITY_HORIZON.effectiveDate, "2026-08-27");
+  assert.equal(AI_CAPABILITY_HORIZON.lastReviewed, "2026-08-27");
+  assert.equal(AI_CAPABILITY_HORIZON.capabilities.length, 8);
+  assert.equal(new Set(AI_CAPABILITY_HORIZON.capabilities.map(({ id }) => id)).size, 8);
+  assert.ok(["voice", "vision-images", "video-audio", "computer-use", "agents", "physical-ai"].every((id) => AI_CAPABILITY_HORIZON.capabilities.some((capability) => capability.id === id)));
+  const supported = new Set(AI_CAPABILITY_HORIZON.sources.flatMap(({ supports }) => supports));
+  assert.ok(AI_CAPABILITY_HORIZON.capabilities.every(({ id }) => supported.has(id)));
+});
+
+test("every country and industry inherits a complete common-business-function layer", () => {
+  assert.equal(COMMON_BUSINESS_FUNCTIONS.length, 8);
+  assert.equal(new Set(COMMON_BUSINESS_FUNCTIONS.map(({ id }) => id)).size, 8);
+  assert.ok(COMMON_BUSINESS_FUNCTIONS.every(({ opportunities }) => Object.keys(opportunities).join(",") === "standard,integrated,advanced"));
+  assert.equal(COUNTRY_PRACTICAL_CONTEXTS.length * INDUSTRY_OUTLOOKS.length, 32);
+});
+
+test("marketing depth includes creation, scheduled publishing and bounded agency", () => {
+  const marketing = COMMON_BUSINESS_FUNCTIONS.find(({ id }) => id === "marketing-brand");
+  assert.ok(marketing);
+  assert.match(marketing.opportunities.standard.outcome, /posts.*images.*short videos/i);
+  assert.match(marketing.opportunities.integrated.outcome, /schedule approved material/i);
+  assert.match(`${marketing.opportunities.advanced.title} ${marketing.opportunities.advanced.outcome}`, /agent/i);
+  assert.match(marketing.opportunities.advanced.humanBoundary, /approve publication and spend/i);
 });
 
 test("law-firm public outlook separates current capability depth from experimental scoring", () => {
