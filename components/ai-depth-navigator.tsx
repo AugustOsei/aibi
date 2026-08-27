@@ -17,12 +17,20 @@ export interface AiDepthLevel {
   items: AiDepthItem[];
 }
 
+interface CountryPractice {
+  countryName: string;
+  industryNote: string;
+  tierGuidance: Record<string, string>;
+}
+
 export function AiDepthNavigator({
   levels,
   industryName,
+  countryPractice,
 }: {
   levels: AiDepthLevel[];
   industryName: string;
+  countryPractice?: CountryPractice | undefined;
 }) {
   const [activeLevelIndex, setActiveLevelIndex] = useState(0);
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
@@ -55,6 +63,21 @@ export function AiDepthNavigator({
         <span>We’ve grouped the opportunities into three levels. Together, they show the range of practical AI use available to {industryName.toLowerCase()} today.</span>
       </header>
 
+      <div className="ai-capability-range" aria-label="AI capabilities available today">
+        <div>
+          <p>Today’s AI range</p>
+          <span>Technology type does not determine the level by itself. Voice or vision can be Standard; autonomy and system access create the deeper implementation.</span>
+        </div>
+        <ul>
+          <li>Language & documents</li>
+          <li>Voice & conversation</li>
+          <li>Vision & multimodal</li>
+          <li>Prediction & optimization</li>
+          <li>Connected workflows</li>
+          <li>Agentic systems</li>
+        </ul>
+      </div>
+
       <div className="simple-level-tabs" role="tablist" aria-label="AI utilization level">
         {levels.map((level, index) => {
           const isActive = index === activeLevelIndex;
@@ -72,7 +95,7 @@ export function AiDepthNavigator({
               onKeyDown={(event) => onTabKeyDown(event, index)}
             >
               <span>{index + 1}</span>
-              <div><strong>{level.title}</strong><small>{index === 0 ? "Easy to start" : index === 1 ? "Connected to your systems" : "More advanced, with human control"}</small></div>
+              <div><strong>{level.title}</strong><small>{index === 0 ? "Mainstream, person-controlled" : index === 1 ? "Connected to your systems" : "Agentic, approval-gated"}</small></div>
             </button>
           );
         })}
@@ -83,6 +106,13 @@ export function AiDepthNavigator({
           <div><p>Showing</p><h3>{activeLevel.title}</h3></div>
           <p>{activeLevel.description}</p>
         </header>
+        {countryPractice ? (
+          <aside className="country-practice-note" aria-label={`${activeLevel.title} considerations for ${countryPractice.countryName}`}>
+            <span>{countryPractice.countryName} · {activeLevel.title}</span>
+            <p>{countryPractice.tierGuidance[activeLevel.id]}</p>
+            <small>{countryPractice.industryNote}</small>
+          </aside>
+        ) : null}
         <ol className="simple-use-list">
           {activeLevel.items.map((item, index) => (
             <li key={item.id}>

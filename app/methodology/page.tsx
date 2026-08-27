@@ -31,6 +31,16 @@ export default function MethodologyPage() {
         <div aria-hidden="true">≠</div>
         <article><span>Actual</span><h2>What is credibly observed?</h2><p>Built from external adoption evidence, normalization, evidence grades, and uncertainty.</p></article>
       </section>
+      <section className="method-principles" aria-labelledby="ai-depth-method">
+        <div><p className="eyebrow">AI in practice</p><h2 id="ai-depth-method">The levels describe implementation depth—not the media AI uses.</h2></div>
+        <ul>
+          <li><strong>Standard AI</strong> covers mainstream language, document, voice or image assistance that a person starts, checks and controls.</li>
+          <li><strong>Integrated AI</strong> connects approved business data and systems for bounded multi-step workflows with defined access and ownership.</li>
+          <li><strong>Advanced AI</strong> covers continuous, multimodal or agentic systems that can plan and prepare actions across tools, with approval gates and accountable people.</li>
+          <li>Voice, vision or multimodal generation is not automatically Advanced. Depth depends on integration, autonomy, risk and operational control.</li>
+          <li>Country guidance describes the practical implementation path for the selected industry; it does not change the underlying global capability assessment.</li>
+        </ul>
+      </section>
       <section className="method-stages">
         {stages.map(([number, title, description]) => (
           <article key={number}><span>{number}</span><h2>{title}</h2><p>{description}</p></article>
@@ -44,6 +54,17 @@ export default function MethodologyPage() {
           <li>Evidence quality may vary by country, industry, population, and measured concept.</li>
           <li>Every score must be reproducible from dated inputs and a declared score version.</li>
           <li>Scores change as capabilities, costs, reliability, and evidence change.</li>
+        </ul>
+      </section>
+      <section className="method-principles" aria-labelledby="hypothetical-headroom-method">
+        <div><p className="eyebrow">Illustrative snapshot</p><h2 id="hypothetical-headroom-method">How the hypothetical adoption gap works.</h2></div>
+        <ul>
+          <li>The Standard AI destination is fixed at 100%: businesses in the industry using at least one applicable Standard AI opportunity. It is not 100% automation or task coverage.</li>
+          <li>Actual is one reported country-industry rate, or the closest disclosed broad-sector proxy when no narrower rate is available.</li>
+          <li>The displayed headroom is 100% minus that reported Actual, expressed in percentage points. It is not the scientific task-utilization Gap Score.</li>
+          <li>Rates with different questions or periods are not combined, averaged, or silently converted.</li>
+          <li>If no suitable current reported rate exists, Actual and the hypothetical gap remain empty.</li>
+          <li>Every result is a dated snapshot and can change as newer or more specific evidence is found.</li>
         </ul>
       </section>
     </div>

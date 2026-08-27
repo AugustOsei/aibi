@@ -2,19 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { AdoptionEvidencePanel } from "../../../components/adoption-evidence-panel";
-import { CountryEvidencePanel } from "../../../components/country-evidence-panel";
+import { AdoptionHeadroomPanel } from "../../../components/adoption-headroom-panel";
 import { CountryPracticalLens, IndustryCapabilityOutlook } from "../../../components/industry-capability-outlook";
 import { FunctionBreakdown } from "../../../components/function-breakdown";
 import { IndustryAtlasHero } from "../../../components/industry-atlas-hero";
 import { ResearchDrawer } from "../../../components/research-drawer";
-import { UtilizationGapPanel } from "../../../components/utilization-gap-panel";
-import { WorkflowGroups } from "../../../components/workflow-groups";
 import {
   getIndustrySummaries,
   getIndustrySummary,
-  getCountryEvidence,
-  getIndustryGapAssessment,
+  getIndustryAdoptionHeadroom,
   getLawFirmIndustryView,
   getCountrySummary,
 } from "../../../src/application/aibi-service";
@@ -56,7 +52,6 @@ function DevelopmentState({
   if (!industry) notFound();
   const outlook = getIndustryOutlook(slug);
   if (!outlook) notFound();
-  const countryEvidence = countrySlug ? getCountryEvidence(countrySlug) : undefined;
   const countryContext = countrySlug ? getCountryPracticalContext(countrySlug) : undefined;
   const selectedCountry = countrySlug ? getCountrySummary(countrySlug) : undefined;
   return (
@@ -70,16 +65,8 @@ function DevelopmentState({
       />
       <div className="shell industry-content">
         <IndustryCapabilityOutlook outlook={outlook} countryContext={countryContext} />
-        {countryEvidence ? (
-          <CountryEvidencePanel evidence={countryEvidence} industrySlug={slug} />
-        ) : (
-          <section className="simple-usage-note">
-            <p>What’s happening today</p>
-            <h2>Choose a country to see what the available evidence reports.</h2>
-            <span>A global industry-wide rate is not inferred from incompatible reports.</span>
-          </section>
-        )}
-        <UtilizationGapPanel gap={getIndustryGapAssessment(slug, countrySlug)} />
+        <AdoptionHeadroomPanel view={getIndustryAdoptionHeadroom(slug, countrySlug)} />
+        {countryContext ? <CountryPracticalLens context={countryContext} industryName={industry.name} /> : null}
       </div>
     </>
   );
@@ -90,33 +77,24 @@ export default async function IndustryPage({ params, searchParams }: Props) {
   const { country: countrySlug } = await searchParams;
   if (slug !== "law-firms") return <DevelopmentState slug={slug} countrySlug={countrySlug} />;
   const view = getLawFirmIndustryView();
-  const countryEvidence = countrySlug ? getCountryEvidence(countrySlug) : undefined;
+  const outlook = getIndustryOutlook(slug);
+  if (!outlook) notFound();
   const countryContext = countrySlug ? getCountryPracticalContext(countrySlug) : undefined;
   const selectedCountry = countrySlug ? getCountrySummary(countrySlug) : undefined;
   return (
     <>
       <IndustryAtlasHero
         name={view.name}
-        description="AI in a law firm can mean something as simple as helping organize files or prepare client intake, or something much deeper, like connecting AI to firm systems or assisting with complex legal research. We’ve mapped those possibilities from easier-to-adopt uses through more integrated and advanced ones. Further down, you can also see what published research says law firms are actually using AI for today."
+        description="AI in a law firm can mean something as simple as helping organize files or prepare client intake, or something much deeper, like connecting AI to firm systems or assisting with complex legal research. We’ve mapped those possibilities from easier-to-adopt uses through more integrated and advanced ones. Further down, you can compare the Standard AI destination with the closest available reported adoption rate for the selected country."
         archetype={view.archetypeName}
         countryName={selectedCountry?.name}
         countryCode={selectedCountry?.iso2}
         evaluationLabel={`${view.possible.effectiveDate} · Baseline v${view.possible.version}`}
       />
       <div className="shell industry-content">
-        <WorkflowGroups groups={view.workflowGroups} industryName={view.name} />
+        <IndustryCapabilityOutlook outlook={outlook} countryContext={countryContext} />
+        <AdoptionHeadroomPanel view={getIndustryAdoptionHeadroom(slug, countrySlug)} />
         {countryContext ? <CountryPracticalLens context={countryContext} industryName={view.name} /> : null}
-        <AdoptionEvidencePanel actual={view.actual} />
-        {countryEvidence ? (
-          <CountryEvidencePanel evidence={countryEvidence} industrySlug={slug} />
-        ) : (
-          <section className="simple-usage-note">
-            <p>What’s happening today</p>
-            <h2>Choose a country to add the closest available official evidence.</h2>
-            <span>The law-firm observations above remain visible because their published geographies are broader than one selected country.</span>
-          </section>
-        )}
-        <UtilizationGapPanel gap={getIndustryGapAssessment(slug, countrySlug)} />
         <ResearchDrawer label="See experimental scoring and methodology">
           <div className="score-explainer">
             <p className="eyebrow">About the experimental index</p>

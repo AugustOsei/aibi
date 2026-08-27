@@ -49,6 +49,41 @@ export interface CountryEvidenceView {
   note: string;
 }
 
+interface StandardDestinationView {
+  value: 100;
+  unit: "percent";
+  label: "Standard AI destination";
+  definition: string;
+}
+
+export type IndustryAdoptionHeadroomView =
+  | {
+      status: "available";
+      industry: IndustrySummaryView;
+      country: CountrySummaryView;
+      destination: StandardDestinationView;
+      actual: Omit<CountrySectorObservationView, "mappedIndustries"> & {
+        unit: "percent";
+        evidenceRelation: "proxy";
+        source: CountryEvidenceView["source"];
+      };
+      headroom: {
+        value: number;
+        unit: "percentage_points";
+        formula: string;
+      };
+      snapshotNote: string;
+    }
+  | {
+      status: "insufficient";
+      industry: IndustrySummaryView;
+      country: CountrySummaryView | null;
+      destination: StandardDestinationView;
+      actual: { value: null; unit: "percent" };
+      headroom: { value: null; unit: "percentage_points" };
+      reason: string;
+    };
+
 export interface EvidenceSourceView {
   title: string;
   publisher: string;
@@ -224,6 +259,81 @@ export const getIndustrySummaries = (): IndustrySummaryView[] => industries.map(
 export const getCountrySummaries = (): CountrySummaryView[] => countries.map((country) => ({ ...country }));
 export const getIndustrySummary = (slug: string) => getIndustrySummaries().find((industry) => industry.slug === slug);
 export const getCountrySummary = (slug: string) => getCountrySummaries().find((country) => country.slug === slug);
+
+const standardDestination = (): StandardDestinationView => ({
+  value: 100,
+  unit: "percent",
+  label: "Standard AI destination",
+  definition: "A reference destination where businesses in this industry use at least one applicable Standard AI opportunity shown above.",
+});
+
+export const getIndustryAdoptionHeadroom = (
+  industrySlug: string,
+  countrySlug?: string,
+): IndustryAdoptionHeadroomView => {
+  const industry = getIndustrySummary(industrySlug);
+  if (!industry) throw new Error(`Unknown industry ${industrySlug}`);
+  const destination = standardDestination();
+  const country = countrySlug ? getCountrySummary(countrySlug) ?? null : null;
+
+  if (!country) {
+    return {
+      status: "insufficient",
+      industry,
+      country: null,
+      destination,
+      actual: { value: null, unit: "percent" },
+      headroom: { value: null, unit: "percentage_points" },
+      reason: countrySlug
+        ? "The selected country is not part of the current AIBI coverage. Without a country-specific reported rate, Actual and the hypothetical gap remain empty."
+        : "Choose a country to see the closest suitable reported AI-adoption rate. Without that Actual ingredient, the hypothetical gap remains empty.",
+    };
+  }
+
+  const evidence = getCountryEvidence(country.slug);
+  const matches = evidence?.observations.filter((observation) =>
+    observation.mappedIndustries.some(({ slug }) => slug === industry.slug),
+  ) ?? [];
+
+  if (matches.length === 0 || !evidence) {
+    return {
+      status: "insufficient",
+      industry,
+      country,
+      destination,
+      actual: { value: null, unit: "percent" },
+      headroom: { value: null, unit: "percentage_points" },
+      reason: `No suitable current reported AI-adoption rate was found for ${industry.name.toLowerCase()} or its closest sector in ${country.name}. Actual is not treated as zero, so the hypothetical gap cannot be calculated.`,
+    };
+  }
+
+  if (matches.length > 1) {
+    throw new Error(`Multiple country-sector adoption observations map to ${industry.slug} in ${country.slug}`);
+  }
+
+  const match = matches[0];
+  if (!match) throw new Error(`Missing matched country-sector observation for ${industry.slug} in ${country.slug}`);
+  const { mappedIndustries: _mappedIndustries, ...observation } = match;
+  const headroomValue = Math.round((destination.value - observation.value) * 10) / 10;
+  return {
+    status: "available",
+    industry,
+    country,
+    destination,
+    actual: {
+      ...observation,
+      unit: "percent",
+      evidenceRelation: "proxy",
+      source: evidence.source,
+    },
+    headroom: {
+      value: headroomValue,
+      unit: "percentage_points",
+      formula: `${destination.value.toFixed(1)} − ${observation.value.toFixed(1)} = ${headroomValue.toFixed(1)} percentage points`,
+    },
+    snapshotNote: "This is a hypothetical adoption gap, not a scientific utilization measure. It is a snapshot based on the currently available report and may change when newer or more specific evidence is found.",
+  };
+};
 
 export const getIndustryGapAssessment = (industrySlug: string, countrySlug?: string): IndustryGapView => {
   const industry = getIndustrySummary(industrySlug);

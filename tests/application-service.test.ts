@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { getCountryEvidence, getCountrySummaries, getIndustryGapAssessment, getIndustrySummaries, getLawFirmIndustryView } from "../src/application/aibi-service.js";
+import { getCountryEvidence, getCountrySummaries, getIndustryAdoptionHeadroom, getIndustryGapAssessment, getIndustrySummaries, getLawFirmIndustryView } from "../src/application/aibi-service.js";
 import { calculateLawFirmBaseline } from "../src/possible/law-firm-baseline.js";
 import { COUNTRY_PRACTICAL_CONTEXTS, INDUSTRY_OUTLOOKS, getCountryPracticalContext } from "../src/data/industry-outlooks.js";
 
@@ -58,14 +58,24 @@ test("catalog exposes only the seeded countries and industries with honest statu
   assert.equal(countries.filter(({ status }) => status === "insufficient_evidence").length, 1);
 });
 
-test("every unscored industry has a complete three-level capability outlook", () => {
-  assert.equal(INDUSTRY_OUTLOOKS.length, 7);
+test("every industry has a complete three-level current-capability outlook", () => {
+  assert.equal(INDUSTRY_OUTLOOKS.length, 8);
   assert.ok(INDUSTRY_OUTLOOKS.every(({ tiers, sources }) => tiers.length === 3 && sources.length >= 2));
   assert.ok(INDUSTRY_OUTLOOKS.every(({ tiers }) => tiers.every(({ useCases }) => useCases.length === 4)));
-  assert.equal(COUNTRY_PRACTICAL_CONTEXTS.length, 3);
+  assert.ok(INDUSTRY_OUTLOOKS.every(({ tiers }) => tiers.map(({ id }) => id).join(",") === "standard,integrated,advanced"));
+  assert.equal(COUNTRY_PRACTICAL_CONTEXTS.length, 4);
   assert.ok(COUNTRY_PRACTICAL_CONTEXTS.every(({ factors, sources }) => factors.length === 3 && sources.length > 0));
-  assert.equal(COUNTRY_PRACTICAL_CONTEXTS.some(({ slug }) => slug === "united-states"), false);
-  assert.equal(getCountryPracticalContext("united-states"), undefined);
+  assert.ok(COUNTRY_PRACTICAL_CONTEXTS.every(({ tierGuidance }) => Object.keys(tierGuidance).join(",") === "standard,integrated,advanced"));
+  assert.ok(COUNTRY_PRACTICAL_CONTEXTS.every(({ industryNotes }) => getIndustrySummaries().every(({ slug }) => Boolean(industryNotes[slug]))));
+  assert.ok(getCountryPracticalContext("united-states"));
+});
+
+test("law-firm public outlook separates current capability depth from experimental scoring", () => {
+  const outlook = INDUSTRY_OUTLOOKS.find(({ slug }) => slug === "law-firms");
+  assert.ok(outlook);
+  assert.match(outlook.tiers[0]?.description ?? "", /language, document, voice or image/);
+  assert.ok(outlook.tiers[2]?.useCases.some(({ title }) => /Agentic|agents/.test(title)));
+  assert.ok(outlook.tiers[2]?.useCases.some(({ title }) => /Multimodal/.test(title)));
 });
 
 test("country evidence preserves official sector values and transparent mappings", () => {
@@ -79,6 +89,52 @@ test("country evidence preserves official sector values and transparent mappings
   assert.deepEqual(canada.observations.map(({ value }) => value), [31.7, 3.6, 1.5, 6.6, 7.3, 17.4]);
   assert.equal(ghana.observations.length, 0);
   assert.ok(us.observations.every(({ mappedIndustries, mappingNote }) => mappedIndustries.length > 0 && mappingNote.length > 0));
+});
+
+test("Canada law firms use one disclosed sector proxy for hypothetical headroom", () => {
+  const snapshot = getIndustryAdoptionHeadroom("law-firms", "canada");
+  assert.equal(snapshot.status, "available");
+  if (snapshot.status !== "available") return;
+  assert.equal(snapshot.destination.value, 100);
+  assert.equal(snapshot.actual.value, 31.7);
+  assert.equal(snapshot.actual.evidenceRelation, "proxy");
+  assert.match(snapshot.actual.sectorLabel, /Professional, scientific and technical services/);
+  assert.match(snapshot.actual.mappingNote, /Broader than the selected industry/);
+  assert.equal(snapshot.headroom.value, 68.3);
+  assert.equal(snapshot.headroom.formula, "100.0 − 31.7 = 68.3 percentage points");
+});
+
+test("every covered country and industry has exactly one reproducible snapshot", () => {
+  for (const country of ["united-states", "united-kingdom", "canada"]) {
+    for (const industry of getIndustrySummaries()) {
+      const first = getIndustryAdoptionHeadroom(industry.slug, country);
+      const second = getIndustryAdoptionHeadroom(industry.slug, country);
+      assert.equal(first.status, "available", `${country}/${industry.slug}`);
+      assert.deepEqual(first, second);
+    }
+  }
+});
+
+test("missing country evidence leaves Actual and hypothetical gap empty, never zero", () => {
+  for (const industry of getIndustrySummaries()) {
+    const snapshot = getIndustryAdoptionHeadroom(industry.slug, "ghana");
+    assert.equal(snapshot.status, "insufficient");
+    if (snapshot.status !== "insufficient") continue;
+    assert.equal(snapshot.actual.value, null);
+    assert.equal(snapshot.headroom.value, null);
+    assert.notEqual(snapshot.actual.value, 0);
+    assert.notEqual(snapshot.headroom.value, 0);
+    assert.match(snapshot.reason, /cannot be calculated/);
+  }
+});
+
+test("a country selection is required before hypothetical headroom is calculated", () => {
+  const snapshot = getIndustryAdoptionHeadroom("restaurants");
+  assert.equal(snapshot.status, "insufficient");
+  if (snapshot.status !== "insufficient") return;
+  assert.equal(snapshot.country, null);
+  assert.equal(snapshot.actual.value, null);
+  assert.equal(snapshot.headroom.value, null);
 });
 
 test("every scored task exposes readable capability evidence", () => {

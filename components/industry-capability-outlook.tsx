@@ -23,14 +23,21 @@ export function IndustryCapabilityOutlook({
   }));
 
   return (
-    <>
-      <section className="capability-outlook" aria-labelledby="capability-outlook-heading">
+    <section className="capability-outlook" aria-labelledby="capability-outlook-heading">
         <h2 id="capability-outlook-heading" className="sr-only">Complete possible AI utilization spectrum</h2>
-        <AiDepthNavigator levels={levels} industryName={outlook.name} />
+        <AiDepthNavigator
+          levels={levels}
+          industryName={outlook.name}
+          countryPractice={countryContext ? {
+            countryName: countryContext.name,
+            industryNote: countryContext.industryNotes[outlook.slug] ?? countryContext.framing,
+            tierGuidance: countryContext.tierGuidance,
+          } : undefined}
+        />
 
         <details className="capability-basis">
           <summary>Research basis and limitations</summary>
-          <p>This is a qualitative capability outlook, not an adoption claim or a completed numeric baseline. Use cases are grounded in the industry&apos;s work and current general AI capabilities; scoring requires task weights and sector-specific validation.</p>
+          <p>This is a qualitative capability outlook, not an adoption claim or a completed numeric baseline. Use cases combine the industry&apos;s work with today&apos;s language, voice, vision, predictive, connected-workflow and agentic capabilities. Country guidance shapes the practical path, but does not alter the underlying global capability assessment.</p>
           <ul>
             {outlook.sources.map((source) => (
               <li key={source.url}>
@@ -40,10 +47,7 @@ export function IndustryCapabilityOutlook({
             ))}
           </ul>
         </details>
-      </section>
-
-      {countryContext ? <CountryPracticalLens context={countryContext} industryName={outlook.name} /> : null}
-    </>
+    </section>
   );
 }
 
@@ -61,9 +65,9 @@ export function CountryPracticalLens({
       <header>
         <p className="eyebrow">Country considerations</p>
         <h2 id={`practical-lens-${context.slug}`}>Using AI in {context.name}</h2>
-        <p>The opportunities above show what {industryName.toLowerCase()} could do with today’s AI tools. This section highlights a few country-specific factors that may shape how those ideas are put into practice in {sentenceCountry}—including privacy rules, local business conditions, infrastructure, tool availability, language, or sector constraints. {context.framing}</p>
+        <p>The opportunities above show the global capability available to {industryName.toLowerCase()} today, while the guidance inside each level describes a practical path for {sentenceCountry}. This section adds the local factors behind that guidance—such as privacy rules, business conditions, infrastructure, tool availability, language, or sector constraints. {context.framing}</p>
       </header>
-      <p className="practical-lens__disclaimer"><span>Method note</span> For now, these local factors are guidance only; they do not change the Possible analysis.</p>
+      <p className="practical-lens__disclaimer"><span>Method note</span> This local guidance shapes implementation, but does not change the underlying Possible capability analysis.</p>
       <div className="practical-lens__factors">
         {context.factors.map((factor, index) => (
           <article key={factor.title}>
