@@ -86,7 +86,7 @@ function GapIllustration() {
 const FLOW_STEPS = [
   { number: "01", title: "Pick a country", detail: "Start with the market you want to understand.", Illustration: CountryIllustration },
   { number: "02", title: "Pick an industry", detail: "Choose the kind of business you want to explore.", Illustration: IndustryIllustration },
-  { number: "03", title: "See what AI can do", detail: "Explore simple, connected and advanced uses.", Illustration: LevelIllustration },
+  { number: "03", title: "See what AI can do", detail: "Start with practical uses that need no special setup.", Illustration: LevelIllustration },
   { number: "04", title: "See what businesses use", detail: "Read what surveys, studies and official data report.", Illustration: UsesIllustration },
   { number: "05", title: "See the gap", detail: "Compare what’s possible with what appears to be happening.", Illustration: GapIllustration },
 ] as const;

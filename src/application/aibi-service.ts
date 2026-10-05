@@ -182,6 +182,8 @@ const INDUSTRY_PRESENTATION: Record<string, Omit<IndustrySummaryView, "status" |
   "barbershop-salon": { slug: "barbershops-salons", name: "Barbershops & Salons", description: "Appointment-led personal services, customer relationships, and local operations." },
   "marketing-agency": { slug: "marketing-agencies", name: "Marketing Agencies", description: "Strategy, creative production, media, analytics, and client service." },
   "healthcare-clinic": { slug: "healthcare-clinics", name: "Healthcare Clinics", description: "Outpatient clinical services, patient administration, and practice operations." },
+  "tourism-hospitality": { slug: "tourism-hospitality", name: "Tourism & Hospitality", description: "Guest stays, tours, bookings, guest service, and property operations." },
+  farm: { slug: "agriculture", name: "Agriculture", description: "Crop and livestock production, inputs, record-keeping, and sales." },
 };
 
 const COUNTRY_SLUGS: Record<string, string> = {

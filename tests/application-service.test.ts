@@ -51,16 +51,16 @@ test("law-firm adoption observations remain separate, sourced constructs", () =>
 test("catalog exposes only the seeded countries and industries with honest statuses", () => {
   const industries = getIndustrySummaries();
   const countries = getCountrySummaries();
-  assert.equal(industries.length, 8);
+  assert.equal(industries.length, 10);
   assert.equal(countries.length, 4);
   assert.equal(industries.filter(({ status }) => status === "available").length, 1);
-  assert.equal(industries.filter(({ status }) => status === "partial").length, 7);
+  assert.equal(industries.filter(({ status }) => status === "partial").length, 9);
   assert.equal(countries.filter(({ status }) => status === "partial").length, 3);
   assert.equal(countries.filter(({ status }) => status === "insufficient_evidence").length, 1);
 });
 
 test("every industry has a complete three-level current-capability outlook", () => {
-  assert.equal(INDUSTRY_OUTLOOKS.length, 8);
+  assert.equal(INDUSTRY_OUTLOOKS.length, 10);
   assert.ok(INDUSTRY_OUTLOOKS.every(({ tiers, sources }) => tiers.length === 3 && sources.length >= 2));
   assert.ok(INDUSTRY_OUTLOOKS.every(({ tiers }) => tiers.every(({ useCases }) => useCases.length === 4)));
   assert.ok(INDUSTRY_OUTLOOKS.every(({ tiers }) => tiers.map(({ id }) => id).join(",") === "standard,integrated,advanced"));
@@ -72,9 +72,9 @@ test("every industry has a complete three-level current-capability outlook", () 
 });
 
 test("the dated capability horizon covers current multimodal and agentic AI", () => {
-  assert.equal(AI_CAPABILITY_HORIZON.version, "2026.08");
-  assert.equal(AI_CAPABILITY_HORIZON.effectiveDate, "2026-08-27");
-  assert.equal(AI_CAPABILITY_HORIZON.lastReviewed, "2026-08-27");
+  assert.equal(AI_CAPABILITY_HORIZON.version, "2026.10");
+  assert.equal(AI_CAPABILITY_HORIZON.effectiveDate, "2026-10-05");
+  assert.equal(AI_CAPABILITY_HORIZON.lastReviewed, "2026-10-05");
   assert.equal(AI_CAPABILITY_HORIZON.capabilities.length, 8);
   assert.equal(new Set(AI_CAPABILITY_HORIZON.capabilities.map(({ id }) => id)).size, 8);
   assert.ok(["voice", "vision-images", "video-audio", "computer-use", "agents", "physical-ai"].every((id) => AI_CAPABILITY_HORIZON.capabilities.some((capability) => capability.id === id)));
@@ -83,10 +83,10 @@ test("the dated capability horizon covers current multimodal and agentic AI", ()
 });
 
 test("every country and industry inherits a complete common-business-function layer", () => {
-  assert.equal(COMMON_BUSINESS_FUNCTIONS.length, 8);
-  assert.equal(new Set(COMMON_BUSINESS_FUNCTIONS.map(({ id }) => id)).size, 8);
+  assert.equal(COMMON_BUSINESS_FUNCTIONS.length, 9);
+  assert.equal(new Set(COMMON_BUSINESS_FUNCTIONS.map(({ id }) => id)).size, 9);
   assert.ok(COMMON_BUSINESS_FUNCTIONS.every(({ opportunities }) => Object.keys(opportunities).join(",") === "standard,integrated,advanced"));
-  assert.equal(COUNTRY_PRACTICAL_CONTEXTS.length * INDUSTRY_OUTLOOKS.length, 32);
+  assert.equal(COUNTRY_PRACTICAL_CONTEXTS.length * INDUSTRY_OUTLOOKS.length, 40);
 });
 
 test("marketing depth includes creation, scheduled publishing and bounded agency", () => {
@@ -137,7 +137,8 @@ test("every covered country and industry has exactly one reproducible snapshot",
     for (const industry of getIndustrySummaries()) {
       const first = getIndustryAdoptionHeadroom(industry.slug, country);
       const second = getIndustryAdoptionHeadroom(industry.slug, country);
-      assert.equal(first.status, "available", `${country}/${industry.slug}`);
+      // No covered survey reports an agriculture sector, so it stays unavailable rather than borrowing another sector's rate.
+      assert.equal(first.status, industry.slug === "agriculture" ? "insufficient" : "available", `${country}/${industry.slug}`);
       assert.deepEqual(first, second);
     }
   }

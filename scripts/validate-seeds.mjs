@@ -17,7 +17,7 @@ assert.deepEqual(
   "Unexpected country codes",
 );
 
-assert.equal(archetypes.length, 8, "Expected exactly eight archetype seeds");
+assert.equal(archetypes.length, 10, "Expected exactly ten archetype seeds");
 assert.equal(firmSizes.length, 4, "Expected exactly four firm-size seeds");
 assert.deepEqual(
   firmSizes.map(({ slug }) => slug),

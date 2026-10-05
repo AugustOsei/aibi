@@ -70,5 +70,23 @@
     "active": true,
     "createdAt": "2026-08-23T00:00:00Z",
     "updatedAt": "2026-08-23T00:00:00Z"
+  },
+  {
+    "id": "archetype-tourism-hospitality",
+    "slug": "tourism-hospitality",
+    "name": "Tourism and hospitality business",
+    "description": "A business providing accommodation, tours, or visitor services.",
+    "active": true,
+    "createdAt": "2026-10-05T00:00:00Z",
+    "updatedAt": "2026-10-05T00:00:00Z"
+  },
+  {
+    "id": "archetype-farm",
+    "slug": "farm",
+    "name": "Farm or agribusiness",
+    "description": "A business producing crops or livestock and selling farm products.",
+    "active": true,
+    "createdAt": "2026-10-05T00:00:00Z",
+    "updatedAt": "2026-10-05T00:00:00Z"
   }
 ]

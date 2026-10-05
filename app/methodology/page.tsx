@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { createPageMetadata } from "../../src/config/site";
 import { AI_CAPABILITY_HORIZON, COMMON_BUSINESS_FUNCTIONS } from "../../src/data/ai-capability-horizon";
+import "../../components/home.css";
+import "../../components/pages.css";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Methodology",
@@ -21,20 +23,21 @@ const stages = [
 
 export default function MethodologyPage() {
   return (
-    <div className="shell page-shell methodology-page">
-      <header className="page-intro">
-        <p className="eyebrow">Methodology</p>
+    <div className="home-flat pg">
+      <header className="pg-head shell">
+        <p className="home-label">Methodology</p>
         <h1>How AIBI keeps what’s possible separate from what’s observed.</h1>
         <p>AIBI first maps what today’s AI can reasonably do, then reviews credible evidence of what industries report using. Keeping those questions separate prevents adoption data from changing the assessment of what is technically and practically possible.</p>
       </header>
-      <section className="method-contrast" aria-label="Possible and Actual distinction">
-        <article><span>Possible</span><h2>What could reasonably be done?</h2><p>Built from current capabilities, business tasks, firm context, and practical constraints.</p></article>
-        <div aria-hidden="true">≠</div>
-        <article><span>Actual</span><h2>What is credibly observed?</h2><p>Built from external adoption evidence, normalization, evidence grades, and uncertainty.</p></article>
+      <section className="shell" aria-label="Possible and Actual distinction">
+        <div className="pg-versus">
+          <article><p className="home-label">Possible</p><h3>What could reasonably be done?</h3><p>Built from current capabilities, business tasks, firm context, and practical constraints.</p></article>
+          <article><p className="home-label">Actual</p><h3>What is credibly observed?</h3><p>Built from external adoption evidence, normalization, evidence grades, and uncertainty.</p></article>
+        </div>
       </section>
-      <section className="method-principles" aria-labelledby="ai-depth-method">
-        <div><p className="eyebrow">AI in practice</p><h2 id="ai-depth-method">The levels describe implementation depth—not the media AI uses.</h2></div>
-        <ul>
+      <section className="pg-split shell" aria-labelledby="ai-depth-method">
+        <div><p className="home-label">AI in practice</p><h2 id="ai-depth-method">The levels describe implementation depth—not the media AI uses.</h2></div>
+        <ul className="pg-list">
           <li><strong>Standard AI</strong> covers mainstream language, document, voice or image assistance that a person starts, checks and controls.</li>
           <li><strong>Integrated AI</strong> connects approved business data and systems for bounded multi-step workflows with defined access and ownership.</li>
           <li><strong>Advanced AI</strong> covers continuous, multimodal or agentic systems that can plan and prepare actions across tools, with approval gates and accountable people.</li>
@@ -42,29 +45,31 @@ export default function MethodologyPage() {
           <li>Country guidance describes the practical implementation path for the selected industry; it does not change the underlying global capability assessment.</li>
         </ul>
       </section>
-      <section className="method-principles" aria-labelledby="capability-horizon-method">
+      <section className="pg-split shell" aria-labelledby="capability-horizon-method">
         <div>
-          <p className="eyebrow">Capability horizon · {AI_CAPABILITY_HORIZON.version}</p>
+          <p className="home-label">Capability horizon · {AI_CAPABILITY_HORIZON.version}</p>
           <h2 id="capability-horizon-method">A dated view of what businesses can use now.</h2>
-          <p>Effective <time dateTime={AI_CAPABILITY_HORIZON.effectiveDate}>August 27, 2026</time>.</p>
+          <p>Effective <time dateTime={AI_CAPABILITY_HORIZON.effectiveDate}>{new Date(`${AI_CAPABILITY_HORIZON.effectiveDate}T00:00:00Z`).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" })}</time>.</p>
         </div>
-        <ul>
+        <ul className="pg-list">
           <li>The horizon covers reasoning, language, documents, voice, vision, image and video creation, data and code, computer use, connected agents and selected physical AI.</li>
           <li>Product names are evidence of capability, not the taxonomy. A capability remains in the model even as vendors and models change.</li>
-          <li>The same {COMMON_BUSINESS_FUNCTIONS.length} common business functions are considered for every country and industry: marketing, sales, service, administration, people, operations, technology and risk.</li>
+          <li>The same {COMMON_BUSINESS_FUNCTIONS.length} common business functions are considered for every country and industry: a personal assistant, marketing, sales, service, administration, people, operations, technology and risk.</li>
           <li>Industry-specific opportunities are added separately, so specialist work does not crowd out the functions nearly every business performs.</li>
           <li>Country guidance then describes practical constraints such as privacy, infrastructure, language, cost and sector rules; it does not pretend the underlying technology is different by country.</li>
           <li>This snapshot is reviewed and timestamped because capability, price, reliability and availability change.</li>
         </ul>
       </section>
-      <section className="method-stages">
-        {stages.map(([number, title, description]) => (
-          <article key={number}><span>{number}</span><h2>{title}</h2><p>{description}</p></article>
-        ))}
+      <section className="shell" aria-label="The eight stages">
+        <ol className="pg-steps" style={{ "--cols": 4 } as React.CSSProperties}>
+          {stages.map(([number, title, description]) => (
+            <li key={number}><span>{number}</span><h3>{title}</h3><p>{description}</p></li>
+          ))}
+        </ol>
       </section>
-      <section className="method-principles">
-        <div><p className="eyebrow">Non-negotiable rules</p><h2>Missing is a finding, not a zero.</h2></div>
-        <ul>
+      <section className="pg-split shell">
+        <div><p className="home-label">Non-negotiable rules</p><h2>Missing is a finding, not a zero.</h2></div>
+        <ul className="pg-list">
           <li>Missing adoption evidence remains missing unless a separately labeled model is introduced.</li>
           <li>Modeled estimates and observed values are never presented as the same thing.</li>
           <li>Evidence quality may vary by country, industry, population, and measured concept.</li>
@@ -72,9 +77,9 @@ export default function MethodologyPage() {
           <li>Scores change as capabilities, costs, reliability, and evidence change.</li>
         </ul>
       </section>
-      <section className="method-principles" aria-labelledby="hypothetical-headroom-method">
-        <div><p className="eyebrow">Illustrative snapshot</p><h2 id="hypothetical-headroom-method">How the hypothetical adoption gap works.</h2></div>
-        <ul>
+      <section className="pg-split shell" aria-labelledby="hypothetical-headroom-method">
+        <div><p className="home-label">Illustrative snapshot</p><h2 id="hypothetical-headroom-method">How the hypothetical adoption gap works.</h2></div>
+        <ul className="pg-list">
           <li>The Standard AI destination is fixed at 100%: businesses in the industry using at least one applicable Standard AI opportunity. It is not 100% automation or task coverage.</li>
           <li>Actual is one reported country-industry rate, or the closest disclosed broad-sector proxy when no narrower rate is available.</li>
           <li>The displayed headroom is 100% minus that reported Actual, expressed in percentage points. It is not the scientific task-utilization Gap Score.</li>

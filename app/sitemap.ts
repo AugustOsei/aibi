@@ -25,5 +25,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticRoutes, ...industryRoutes, ...countryRoutes];
+  const pairRoutes: MetadataRoute.Sitemap = getCountrySummaries().flatMap((country) =>
+    getIndustrySummaries().map((industry) => ({
+      url: absoluteUrl(`/${country.slug}/${industry.slug}`),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })));
+
+  return [...staticRoutes, ...industryRoutes, ...countryRoutes, ...pairRoutes];
 }

@@ -89,16 +89,16 @@ export const INDUSTRY_OUTLOOKS: IndustryOutlook[] = [
     maturityLabel: "Current capability outlook · experimental scoring available separately",
     tiers: [
       tier("standard", [
-        ["Draft, compare and summarize routine documents", "Prepare first drafts, redlines, clause extracts and source-linked summaries from supplied matter material.", "A lawyer verifies legal effect, facts, authorities and suitability before use."],
-        ["Search approved firm knowledge and authorities", "Ask natural-language questions across approved precedents, templates and research sources with links back to the material.", "Lawyers confirm currency, completeness and every proposition relied upon."],
-        ["Capture intake and meetings by text or voice", "Turn consented calls, meetings and supplied documents into structured intake, notes and follow-up drafts.", "Staff confirm consent, privilege, identity, conflicts and factual accuracy."],
-        ["Organize matter files and routine communications", "Classify documents, prepare client updates and assemble working checklists from approved information.", "People approve recipients, commitments, deadlines and substantive content."],
+        ["Write first drafts and summarise documents", "Get a first draft of a letter or agreement, compare two versions to see what changed, and get a short summary of a long document that points back to the original.", "A lawyer checks the facts, the law and whether it fits the client before anything is used."],
+        ["Ask questions across the firm’s own files", "Type a question in everyday words and get answers from the firm’s past work, templates and research sources, with links to where each answer came from.", "Lawyers confirm the material is current and complete before relying on it."],
+        ["Turn calls and meetings into notes", "With the client’s consent, record a call or meeting and get tidy notes, the details needed to open a file, and a draft follow-up message.", "Staff confirm consent, confidentiality, who the client is, any conflicts of interest, and that the notes are accurate."],
+        ["Keep files and client updates in order", "Sort documents into the right folders, draft routine updates to clients, and build to-do checklists from information already on file.", "People approve who receives what, any promises or deadlines, and the content itself."],
       ]),
       tier("integrated", [
-        ["Connected matter workspace assistant", "Retrieve and prepare work across the document system, knowledge base, email and matter-management platform under role-based access.", "The firm controls permissions, source boundaries, retention and every external action."],
-        ["Conflict, intake and matter-opening workflow", "Collect information, search defined records, identify possible conflicts and route exceptions through connected systems.", "Qualified staff resolve conflicts and approve opening or declining a matter."],
-        ["Deadline, status and billing workflow", "Extract procedural events, prepare reminders, update draft status and assemble billing narratives across matter systems.", "Authoritative dates, filings, invoices and system changes require human confirmation."],
-        ["Source-grounded drafting workflow", "Combine approved templates, matter facts and verified authorities to prepare substantive working drafts with traceable sources.", "Responsible lawyers determine strategy, legal analysis and final language."],
+        ["An assistant that works across the firm’s systems", "Lets staff find and prepare work across the firm’s documents, past work, email and case-management software, with each person seeing only what they are allowed to.", "The firm controls who can see what, how long records are kept, and anything sent outside the firm."],
+        ["Open new client files with fewer manual steps", "Collects a new client’s details, searches the firm’s records for possible conflicts of interest, and passes anything unusual to staff.", "Qualified staff resolve conflicts and decide whether to take on the client."],
+        ["Track deadlines, progress and billing", "Picks out court and filing dates, prepares reminders, updates the status of each case in draft, and prepares the wording for bills.", "People confirm official dates, filings, invoices and any change to the firm’s records."],
+        ["Draft from the firm’s own templates and facts", "Combines approved templates, the facts of the case and checked legal sources into a working draft that shows where each part came from.", "The responsible lawyer decides the strategy, the legal analysis and the final wording."],
       ]),
       tier("advanced", [
         ["Agentic due-diligence and discovery review", "Plan and execute bounded multi-step review across large document sets, then produce traceable issue lists and exception queues.", "Scope, privilege calls, responsiveness and conclusions remain lawyer-controlled."],
@@ -117,16 +117,16 @@ export const INDUSTRY_OUTLOOKS: IndustryOutlook[] = [
     maturityLabel: "Qualitative capability outlook · scoring research in progress",
     tiers: [
       tier("standard", [
-        ["Extract invoices, receipts and statements", "Turn supplied documents into structured draft entries and review queues.", "A person verifies amounts, accounts, tax treatment and source completeness."],
-        ["Prepare reconciliation suggestions", "Match transactions and flag unmatched, duplicate or unusual items.", "A practitioner resolves exceptions and approves adjustments."],
-        ["Draft client requests and explanations", "Prepare missing-information lists, routine emails and plain-language summaries.", "A professional checks accuracy, confidentiality and advice."],
-        ["Build tax and close checklists", "Create engagement-specific working checklists from approved templates and known requirements.", "Qualified staff confirm jurisdiction, deadlines and applicability."],
+        ["Read invoices, receipts and statements", "Turn photos or PDFs of invoices, receipts and bank statements into draft bookkeeping entries, with a list of anything that needs a second look.", "A person checks the amounts, the accounts used, the tax treatment and that nothing is missing."],
+        ["Spot what doesn’t match in the books", "Match bank transactions against the records and flag items that are unmatched, duplicated or unusual.", "An accountant resolves each flagged item and approves any correction."],
+        ["Draft messages and explanations for clients", "Prepare lists of missing documents, routine emails and plain-language summaries of what the numbers mean.", "A professional checks accuracy, confidentiality and any advice given."],
+        ["Build checklists for tax and month-end", "Create a working checklist for each client from the firm’s templates and the known requirements.", "Qualified staff confirm which rules and deadlines apply."],
       ]),
       tier("integrated", [
-        ["Continuous close workflow", "Connect ledgers, document stores and task systems to prepare entries, evidence and exception queues throughout the month.", "Staff approve postings and control access to financial systems."],
-        ["Audit-evidence triage", "Classify evidence, link it to procedures and surface gaps or contradictions for review.", "Auditors determine sufficiency, reliability and conclusions."],
-        ["Cash-flow and variance analysis", "Explain movements, test assumptions and prepare scenario-ready management reporting.", "Professionals validate source data and communicate uncertainty."],
-        ["Search firm methods and prior work", "Retrieve approved policies, templates and precedent work with source links.", "Practitioners confirm currency and engagement fit."],
+        ["Keep the books up to date through the month", "Links the accounts, stored documents and task lists so entries, supporting documents and items needing review are prepared continuously, not only at month-end.", "Staff approve what is posted and control who can access the financial systems."],
+        ["Sort audit evidence", "Files each piece of evidence against the audit step it supports and points out gaps or contradictions.", "Auditors decide whether the evidence is sufficient and reliable, and reach the conclusions."],
+        ["Explain cash flow and changes in the numbers", "Explains why figures moved, tests assumptions and prepares management reports with what-if scenarios.", "Professionals check the source data and are clear about uncertainty."],
+        ["Search the firm’s methods and past work", "Finds approved policies, templates and earlier work, with links to the source.", "Practitioners confirm it is current and fits the client."],
       ]),
       tier("advanced", [
         ["Continuous controls monitoring", "Monitor transaction and control signals for emerging exceptions or breakdowns.", "Humans investigate alerts and own control conclusions."],
@@ -145,16 +145,16 @@ export const INDUSTRY_OUTLOOKS: IndustryOutlook[] = [
     maturityLabel: "Qualitative capability outlook · scoring research in progress",
     tiers: [
       tier("standard", [
-        ["Summarize plans, specifications and addenda", "Extract scope, exclusions, materials and questions into a bid-review checklist.", "Estimators verify drawings, quantities and contractual meaning."],
-        ["Draft RFIs, submittals and change records", "Prepare structured drafts from project correspondence and field notes.", "Project staff approve every contractual communication."],
-        ["Turn field notes into daily reports", "Organize voice notes, photos and logs into consistent progress records.", "Supervisors confirm events, labour, conditions and incidents."],
-        ["Prepare toolbox talks and safety paperwork", "Adapt approved safety material to the planned activity and site context.", "Competent site personnel determine hazards and controls."],
+        ["Summarise drawings and specifications", "Pull out the scope of work, what is excluded, the materials and open questions into a checklist for preparing a bid.", "Estimators check the drawings, quantities and what the contract actually says."],
+        ["Draft formal project paperwork", "Prepare draft questions to the designer, material approval requests and records of changes from emails and site notes.", "Project staff approve every communication that affects the contract."],
+        ["Turn site notes into daily reports", "Combine voice notes, photos and logs into a consistent daily progress record.", "Supervisors confirm what happened, who was on site, the conditions and any incidents."],
+        ["Prepare safety briefings and paperwork", "Adapt approved safety material to the day’s work and the site.", "A competent person on site decides the hazards and controls."],
       ]),
       tier("integrated", [
-        ["Schedule-risk detection", "Connect schedule, progress and issue data to flag slippage and dependency risks.", "Project leaders decide recovery actions and commitments."],
-        ["Progress-image comparison", "Compare approved site imagery with plans or prior periods to route possible deviations.", "Qualified people inspect and determine compliance."],
-        ["Procurement and lead-time alerts", "Link material schedules, purchase orders and supplier updates to forecast shortages.", "Buyers approve substitutions, orders and supplier action."],
-        ["Change-order workflow", "Assemble notices, supporting records, cost inputs and status across connected systems.", "Commercial staff validate entitlement, pricing and submission."],
+        ["Spot schedule risks early", "Links the programme, progress records and reported problems to flag delays and tasks that depend on each other.", "Project leaders decide how to recover and what to commit to."],
+        ["Compare site photos with the plans", "Compares approved site photos with the drawings or with earlier photos and flags possible differences for inspection.", "Qualified people inspect and decide whether the work complies."],
+        ["Warn about material shortages", "Links material schedules, purchase orders and supplier updates to predict shortages before they hold up work.", "Buyers approve substitutions, orders and any action with suppliers."],
+        ["Manage change requests", "Gathers notices, supporting records, cost inputs and status for each change to the contract, across the systems in use.", "Commercial staff confirm entitlement, pricing and what is submitted."],
       ]),
       tier("advanced", [
         ["Alternative schedule generation", "Generate and compare feasible sequencing options under labour, equipment and access constraints.", "Construction leadership selects and validates the plan."],
@@ -173,16 +173,16 @@ export const INDUSTRY_OUTLOOKS: IndustryOutlook[] = [
     maturityLabel: "Qualitative capability outlook · scoring research in progress",
     tiers: [
       tier("standard", [
-        ["Draft menus and guest communications", "Prepare descriptions, translations, FAQs and promotion drafts from approved facts.", "Staff verify allergens, prices, claims and cultural fit."],
-        ["Summarize reviews and feedback", "Group recurring guest themes and route urgent service issues.", "Managers investigate context before acting."],
-        ["Prepare staff schedules", "Draft shifts from availability, expected demand and defined labour rules.", "Managers approve fairness, coverage and legal compliance."],
-        ["Create prep and inventory reminders", "Turn recipes, pars and known bookings into working prep or count lists.", "Kitchen staff confirm quantities, freshness and substitutions."],
+        ["Write menus and messages to guests", "Draft dish descriptions, translations, answers to common questions and promotions from facts you provide.", "Staff check allergens, prices, claims and that the wording suits your customers."],
+        ["Summarise reviews and feedback", "Group what guests keep saying, good and bad, and flag urgent complaints.", "Managers look into the context before acting."],
+        ["Draft staff rotas", "Prepare a shift plan from staff availability, expected busy times and your labour rules.", "Managers approve fairness, cover and legal compliance."],
+        ["Make prep and stock-count lists", "Turn recipes, minimum stock levels and known bookings into a working list of what to prepare or count.", "Kitchen staff confirm quantities, freshness and substitutions."],
       ]),
       tier("integrated", [
-        ["Demand and prep forecasting", "Combine sales, reservations, weather and event history to forecast covers and item demand.", "Operators adjust for local knowledge and unusual events."],
-        ["Waste and variance analysis", "Connect purchasing, recipes, counts and sales to identify likely waste or portion issues.", "Managers validate data and operational causes."],
-        ["Purchasing recommendations", "Suggest replenishment quantities using forecasts, stock and supplier constraints.", "A person approves orders, substitutions and cash commitments."],
-        ["Voice ordering connected to operations", "Handle bounded phone or drive-through orders and pass confirmed items into ordering systems.", "Allergy-related, ambiguous or upset-customer interactions escalate to staff."],
+        ["Forecast how busy you will be", "Uses past sales, bookings, weather and local events to predict customer numbers and which dishes will sell.", "Operators adjust for local knowledge and unusual events."],
+        ["Find where food and money are being lost", "Links purchases, recipes, stock counts and sales to show likely waste or portion problems.", "Managers check the data and the real cause."],
+        ["Suggest what to order", "Recommends how much to reorder, using the forecast, current stock and supplier limits.", "A person approves orders, substitutions and spending."],
+        ["Take phone orders into your ordering system", "Handles straightforward phone or drive-through orders and passes confirmed items into the ordering system.", "Anything about allergies, anything unclear, or an upset customer goes to staff."],
       ]),
       tier("advanced", [
         ["Menu and margin simulation", "Test price, recipe, demand and capacity changes before altering the menu.", "Operators own assumptions and guest-value decisions."],
@@ -201,16 +201,16 @@ export const INDUSTRY_OUTLOOKS: IndustryOutlook[] = [
     maturityLabel: "Qualitative capability outlook · scoring research in progress",
     tiers: [
       tier("standard", [
-        ["Create product content", "Draft descriptions, comparisons, translations and staff product briefs from approved specifications.", "Staff verify claims, price and availability."],
-        ["Answer routine product questions", "Retrieve policy and catalog information for web or staff-assisted responses.", "Complex, safety-sensitive or complaint cases escalate."],
-        ["Summarize reviews and returns", "Group recurring product, service and fit issues for buyers and managers.", "People validate causes before changing assortment."],
-        ["Prepare shift and task plans", "Draft coverage and daily task lists from traffic patterns and availability.", "Managers approve labour rules, fairness and priorities."],
+        ["Write product descriptions", "Draft descriptions, comparisons, translations and short product guides for staff from the product details you provide.", "Staff check claims, price and availability."],
+        ["Answer everyday product questions", "Find the right answer from your policies and product list, for your website or for staff helping a customer.", "Complicated, safety-related or complaint cases go to a person."],
+        ["Summarise reviews and returns", "Group recurring problems with products, service or sizing so buyers and managers can see patterns.", "People confirm the cause before changing what the shop stocks."],
+        ["Plan shifts and daily tasks", "Draft staff cover and daily task lists from how busy the shop usually is and who is available.", "Managers approve labour rules, fairness and priorities."],
       ]),
       tier("integrated", [
-        ["Demand and replenishment forecasting", "Connect sales, stock, promotions and lead times to suggest reorder quantities.", "Buyers approve orders and account for local events."],
-        ["Assisted recommendations", "Use consented customer and product signals to rank useful options.", "Controls prevent sensitive inference, manipulation and unfair treatment."],
-        ["Returns and fraud triage", "Route unusual return patterns or transaction exceptions for review.", "AI does not accuse customers or make final adverse decisions."],
-        ["Campaign-to-inventory coordination", "Align promotion drafts and audiences with available stock, margin and fulfilment capacity.", "Teams approve audience, offer and channel execution."],
+        ["Forecast demand and suggest reorders", "Links sales, stock, promotions and delivery times to suggest how much to reorder.", "Buyers approve orders and allow for local events."],
+        ["Suggest products to customers", "Uses information customers have agreed to share, plus product details, to suggest useful options.", "Controls prevent guessing sensitive things about people, manipulation and unfair treatment."],
+        ["Flag unusual returns", "Passes unusual return patterns or odd transactions to staff for review.", "AI does not accuse customers or make final decisions against them."],
+        ["Match promotions to what is in stock", "Checks promotion drafts and target audiences against available stock, profit margin and delivery capacity.", "Teams approve the audience, the offer and where it runs."],
       ]),
       tier("advanced", [
         ["Store-vision assistance", "Detect shelf gaps, queue build-up or possible merchandising exceptions from approved feeds.", "People verify conditions; biometric identification is out of scope by default."],
@@ -229,16 +229,16 @@ export const INDUSTRY_OUTLOOKS: IndustryOutlook[] = [
     maturityLabel: "Qualitative capability outlook · scoring research in progress",
     tiers: [
       tier("standard", [
-        ["Handle booking questions and reminders", "Answer routine availability, policy and preparation questions across approved channels.", "Unusual requests and complaints reach a person."],
-        ["Summarize consultation notes", "Turn consented notes into a concise service history and preference checklist.", "The professional confirms accuracy directly with the client."],
-        ["Draft follow-up and rebooking messages", "Prepare personalized aftercare and reminder drafts from approved templates.", "Staff verify advice, timing and consent."],
-        ["Create visual consultations and local content", "Generate clearly labelled style previews, posts, offers and service explanations from approved references.", "A preview is not a promise; professionals approve feasibility, claims, imagery and promotions."],
+        ["Answer booking questions and send reminders", "Reply to routine questions about availability, prices and how to prepare, on the channels you choose, and remind clients of appointments.", "Unusual requests and complaints go to a person."],
+        ["Keep short notes on each client", "With the client’s consent, turn your notes into a brief service history and a list of their preferences.", "The stylist or barber confirms the details with the client."],
+        ["Draft follow-up and rebooking messages", "Prepare personal aftercare tips and reminders to book again, using your approved wording.", "Staff check the advice, the timing and that the client agreed to be contacted."],
+        ["Show style previews and create local content", "Generate clearly labelled previews of a style, plus posts, offers and service explanations, from reference pictures you approve.", "A preview is not a promise; the professional approves what is achievable, and all claims, images and promotions."],
       ]),
       tier("integrated", [
-        ["Demand-aware scheduling", "Use appointment history, service duration and availability to reduce gaps and overrun risk.", "Managers control buffers, fairness and staff workload."],
-        ["Product and supply planning", "Link appointments, service mix and stock to suggest replenishment.", "Staff verify product suitability and approve purchases."],
-        ["Client-retention workflow", "Identify consented rebooking opportunities and prepare non-intrusive outreach.", "No sensitive profiling; staff control contact and offers."],
-        ["Voice receptionist with live handoff", "Handle routine calls, bookings and changes through the appointment system while preserving a live escalation path.", "Sensitive, ambiguous or dissatisfied-client interactions transfer to staff."],
+        ["Smarter appointment scheduling", "Uses past appointments, how long each service takes and staff availability to reduce empty gaps and overruns.", "Managers control buffer time, fairness and staff workload."],
+        ["Plan products and supplies", "Links upcoming appointments and services to stock levels to suggest what to reorder.", "Staff check product suitability and approve purchases."],
+        ["Remind clients who are due to return", "Spots clients who have agreed to be contacted and may be due a visit, and prepares a gentle reminder.", "No sensitive profiling; staff control who is contacted and what is offered."],
+        ["A phone receptionist that can hand over to a person", "Answers routine calls and makes or changes bookings in the appointment system, with a clear way to reach a person.", "Sensitive, unclear or unhappy-client calls are transferred to staff."],
       ]),
       tier("advanced", [
         ["Approval-gated client-service agent", "Coordinate consented reminders, waitlists, rebooking and routine follow-up across channels and systems.", "Staff control contact rules, exceptions, complaints and customer-impacting changes."],
@@ -257,16 +257,16 @@ export const INDUSTRY_OUTLOOKS: IndustryOutlook[] = [
     maturityLabel: "Qualitative capability outlook · scoring research in progress",
     tiers: [
       tier("standard", [
-        ["Develop brief and concept options", "Generate structured territories, questions and early concepts from a client brief.", "Strategists select the direction and challenge assumptions."],
-        ["Produce multimodal channel variants", "Adapt approved concepts across text, image, audio and video formats, lengths and audiences.", "Humans protect the idea, claims, rights and brand voice."],
-        ["Summarize research and reporting", "Synthesize supplied sources, campaign results and meeting material with citations.", "Analysts verify data, attribution and conclusions."],
-        ["Prepare proposals and status updates", "Draft scopes, timelines, recaps and next steps from approved information.", "Account teams approve commitments and commercial terms."],
+        ["Explore ideas from a client brief", "Generate possible directions, questions to ask and early concepts from the brief.", "Strategists choose the direction and challenge the assumptions."],
+        ["Adapt one idea for every channel", "Turn an approved concept into text, image, audio and video versions in different lengths and for different audiences.", "People protect the idea, the claims, usage rights and the brand’s voice."],
+        ["Summarise research and results", "Combine supplied sources, campaign results and meeting notes into a summary that shows where each point came from.", "Analysts check the data, what caused what, and the conclusions."],
+        ["Draft proposals and progress updates", "Prepare scopes of work, timelines, meeting recaps and next steps from approved information.", "Account teams approve commitments and commercial terms."],
       ]),
       tier("integrated", [
-        ["Campaign operations workflow", "Connect briefs, assets, approvals, trafficking and reporting across systems.", "Humans approve publication, spend and audience settings."],
-        ["Privacy-aware audience analysis", "Find patterns in consented first-party and campaign data without exposing identities.", "Teams enforce consent, minimization and prohibited-use rules."],
-        ["Media optimization assistance", "Forecast delivery and recommend bounded budget or bid changes from live performance.", "Media owners approve material spend changes."],
-        ["Brand knowledge system", "Retrieve approved claims, voice, visual rules and prior decisions during production.", "Brand owners resolve conflicts and exceptions."],
+        ["Run campaign logistics across systems", "Links briefs, creative files, approvals, ad set-up and reporting so work moves between systems with less manual copying.", "People approve what is published, the spend and the audience settings."],
+        ["Analyse audiences without exposing individuals", "Finds patterns in campaign data and in customer data collected with consent, without revealing who anyone is.", "Teams enforce consent, collect only what is needed, and block prohibited uses."],
+        ["Suggest budget changes from live results", "Forecasts how ads will deliver and recommends limited budget or bid changes based on current performance.", "Media owners approve any significant change in spend."],
+        ["A brand rulebook the tools can consult", "Lets tools look up approved claims, tone of voice, visual rules and past decisions while work is being produced.", "Brand owners resolve conflicts and exceptions."],
       ]),
       tier("advanced", [
         ["Synthetic concept testing", "Use simulated reactions to expose questions and hypotheses before real research.", "Synthetic responses are not evidence of real customer preference."],
@@ -285,16 +285,16 @@ export const INDUSTRY_OUTLOOKS: IndustryOutlook[] = [
     maturityLabel: "Qualitative capability outlook · clinical scoring requires additional validation",
     tiers: [
       tier("standard", [
-        ["Draft visit documentation", "Turn consented encounter audio or notes into a structured draft for the record.", "The clinician verifies every clinical fact and signs the note."],
-        ["Prepare patient communications", "Draft reminders, instructions and plain-language education from approved material.", "Clinical staff verify suitability and escalation advice."],
-        ["Summarize incoming records", "Organize supplied histories, results and correspondence into a source-linked review aid.", "Clinicians confirm relevance, accuracy and omissions."],
-        ["Support scheduling and intake", "Collect bounded intake fields, answer routine policy questions and route urgency signals.", "AI does not diagnose; urgent or ambiguous cases escalate."],
+        ["Draft notes from a patient visit", "With consent, turn a recording or notes of the visit into a structured draft for the patient record.", "The clinician checks every clinical fact and signs the note."],
+        ["Write messages to patients", "Draft reminders, instructions and plain-language health information from approved material.", "Clinical staff check it suits the patient and that advice on when to seek help is right."],
+        ["Summarise incoming records", "Organise a patient’s history, results and letters into a summary that points back to each source.", "Clinicians confirm what is relevant, accurate and missing."],
+        ["Help with scheduling and registration", "Collect basic registration details, answer routine questions about the clinic, and flag anything that sounds urgent.", "AI does not diagnose; urgent or unclear cases go straight to staff."],
       ]),
       tier("integrated", [
-        ["Referral and results workflow", "Connect documents, queues and task systems to classify, route and track follow-up.", "Clinical teams own prioritization and closure."],
-        ["Coding and authorization assistance", "Prepare suggested codes, evidence packets and payer forms from the verified record.", "Qualified staff validate codes and representations."],
-        ["Capacity and no-show forecasting", "Forecast appointment demand and likely gaps to improve access and staffing.", "Managers prevent discriminatory or punitive use."],
-        ["Population-care worklists", "Identify patients potentially due for approved follow-up using defined clinical rules.", "Clinicians review eligibility and patient context."],
+        ["Track referrals and test results", "Links documents, work queues and task lists to sort, route and follow up referrals and results.", "Clinical teams decide priority and when an item is closed."],
+        ["Help with billing codes and insurer approvals", "Prepares suggested billing codes, supporting documents and insurer forms from the verified patient record.", "Qualified staff check the codes and everything submitted."],
+        ["Forecast demand and missed appointments", "Predicts appointment demand and likely gaps to improve access and staffing.", "Managers make sure it is never used to discriminate against or penalise patients."],
+        ["Lists of patients due for follow-up", "Identifies patients who may be due an approved follow-up, using defined clinical rules.", "Clinicians review eligibility and each patient’s situation."],
       ]),
       tier("advanced", [
         ["Validated clinical decision support", "Present patient-specific risk or diagnostic support within an approved intended use.", "A licensed clinician remains responsible for diagnosis and treatment."],
@@ -314,6 +314,62 @@ export const INDUSTRY_OUTLOOKS: IndustryOutlook[] = [
       },
       nist,
     ],
+  },
+  {
+    slug: "tourism-hospitality",
+    name: "Tourism & Hospitality",
+    framing: "Use AI to answer guests faster, keep listings and bookings accurate and plan staffing and supplies, while hospitality, safety and guest care stay with people.",
+    archetype: "Independent hotel, guesthouse or tour operator",
+    maturityLabel: "Qualitative capability outlook · scoring research in progress",
+    tiers: [
+      tier("standard", [
+        ["Answer guest questions before and during a stay", "Draft replies about rooms, prices, directions, check-in times and local attractions, by text or voice and in several languages.", "Staff confirm availability, prices and anything promised to a guest."],
+        ["Write listings, itineraries and guest information", "Draft room and tour descriptions, day-by-day itineraries, welcome notes and house rules from facts you provide.", "Staff check that descriptions, photos and claims are accurate and current."],
+        ["Summarise guest reviews", "Group what guests praise and complain about across booking sites, and draft polite replies.", "Managers look into issues and approve replies before posting."],
+        ["Prepare housekeeping and staff rotas", "Draft cleaning lists and shift plans from arrivals, departures and staff availability.", "Managers approve fairness, cover and labour rules."],
+      ]),
+      tier("integrated", [
+        ["Keep availability and prices in step across booking sites", "Links your booking calendar with online travel sites so rooms or tour places and prices stay the same everywhere.", "Staff approve price changes and resolve double bookings."],
+        ["Forecast how busy you will be", "Uses past bookings, seasons, holidays and local events to predict occupancy and plan staff and supplies.", "Managers adjust for local knowledge and unusual events."],
+        ["A booking assistant linked to your reservation system", "Answers enquiries by phone or chat, checks real availability and makes or changes straightforward bookings, with a clear way to reach a person.", "Refunds, complaints, group bookings and special needs go to staff."],
+        ["Plan maintenance and supplies", "Links room status, reported faults and stock levels to schedule repairs and suggest what to reorder.", "Staff confirm safety issues and approve spending."],
+      ]),
+      tier("advanced", [
+        ["Price and occupancy simulation", "Test different prices, packages and minimum stays against expected demand before changing rates.", "Owners decide pricing and fairness to guests."],
+        ["Personalised stay planning", "Prepare tailored itineraries and offers from preferences a guest has agreed to share.", "No sensitive profiling; staff approve offers and partner commitments."],
+        ["Multi-property coordination", "Coordinate forecasts, staffing, supplies and promotions across several properties or tours.", "Managers approve transfers and operating changes."],
+        ["Approval-gated guest-operations agent", "Monitor bookings, guest requests, staffing and supplies, then prepare coordinated actions across systems.", "People approve refunds, purchases, staffing changes, guest commitments and safety decisions."],
+      ]),
+    ],
+    sources: [onet("Lodging Managers", "11-9081.00", "Occupational basis for guest services, reservations, staffing, housekeeping, maintenance and property operations."), aiIndex2026, nist],
+  },
+  {
+    slug: "agriculture",
+    name: "Agriculture",
+    framing: "Use AI to get practical advice faster, keep better records and plan around weather and markets, while decisions about land, animals, chemicals and money stay with the farmer.",
+    archetype: "Small or medium farm or agribusiness",
+    maturityLabel: "Qualitative capability outlook · scoring research in progress",
+    tiers: [
+      tier("standard", [
+        ["Ask farming questions in everyday language", "Ask by text or voice about planting times, crop care, storage or animal health and get general guidance, including in local languages where the tool supports them.", "The farmer checks advice against local conditions, and with an extension officer or vet, before acting."],
+        ["Identify possible pests and diseases from a photo", "Take a photo of a leaf, plant or animal and get a list of possible causes and what to look for next.", "A photo result is not a diagnosis; an agronomist or vet confirms before any treatment."],
+        ["Keep simple farm records", "Turn spoken or typed notes and photos of receipts into records of inputs, labour, harvests and sales.", "The farmer checks amounts and dates."],
+        ["Write messages to buyers and suppliers", "Draft price enquiries, offers, delivery notices and simple agreements from details you provide.", "The farmer confirms prices, quantities and anything promised."],
+      ]),
+      tier("integrated", [
+        ["Plan work around the weather forecast", "Links local weather forecasts to your crop calendar to suggest when to plant, spray, irrigate or harvest.", "The farmer decides, allowing for what they see in the field."],
+        ["Track costs and profit for each crop or field", "Links purchase, labour and sales records to show what each crop or field costs and earns.", "The farmer checks the figures before using them for loans or decisions."],
+        ["Follow market prices and prepare sales", "Brings together market price information and your stock to suggest when and where to sell.", "The farmer decides when to sell and at what price."],
+        ["Keep the records buyers and certifiers ask for", "Organises records of inputs, treatments and harvest dates so they can be shown to buyers, lenders or certification schemes.", "The farmer confirms the records are true and complete."],
+      ]),
+      tier("advanced", [
+        ["Field monitoring from drone or satellite images", "Analyse images of fields to flag areas of possible stress, pests or water problems for inspection.", "A person inspects the field and decides on treatment."],
+        ["Yield and season simulation", "Test planting dates, varieties and input levels against weather and price scenarios.", "Forecasts support, and do not replace, the farmer’s judgement."],
+        ["Sensor-guided irrigation and feeding", "Use soil, weather or animal sensors to recommend or adjust watering and feeding within set limits.", "People set the limits and check equipment and animal welfare."],
+        ["Approval-gated farm-operations agent", "Monitor weather, stock, prices and tasks, then prepare coordinated purchases, work plans and sales for approval.", "People approve spending, chemical use, sales and anything affecting safety or animals."],
+      ]),
+    ],
+    sources: [onet("Farmers, Ranchers, and Other Agricultural Managers", "11-9013.00", "Occupational basis for crop and livestock planning, purchasing, record-keeping, labour and sales."), aiIndex2026, nist],
   },
 ];
 
@@ -336,6 +392,8 @@ export const COUNTRY_PRACTICAL_CONTEXTS: CountryPracticalContext[] = [
       "barbershops-salons": "Use consented client preferences sparingly and preserve a person for consultations, complaints and sensitive service questions.",
       "marketing-agencies": "Control claims, rights, endorsements, audience data and publication; synthetic content and targeting still carry advertiser and agency responsibility.",
       "healthcare-clinics": "Apply the relevant health-privacy, clinical, payer and medical-device requirements; clinicians remain responsible for patient care.",
+      "tourism-hospitality": "Keep refund, accessibility, pricing-disclosure and guest-safety decisions with staff, and check state consumer-protection and privacy rules for guest data.",
+      agriculture: "Check pesticide-label, food-safety and farm-labour rules locally, and confirm advice with extension services before acting.",
     },
     factors: [
       { title: "Rules vary by use", detail: "Identify applicable federal, state, sector and professional requirements rather than assuming one national rule covers every workflow." },
@@ -362,6 +420,8 @@ export const COUNTRY_PRACTICAL_CONTEXTS: CountryPracticalContext[] = [
       "barbershops-salons": "Use consented appointment and preference data only for clear purposes; maintain human consultation and easy live handoff.",
       "marketing-agencies": "Respect UK data, advertising, rights and transparency duties across targeting, synthetic content and agent-assisted publication.",
       "healthcare-clinics": "Treat health information and clinical outputs as high impact; use validated systems, defined purpose and accountable clinical review.",
+      "tourism-hospitality": "Apply UK consumer-rights, package-travel and data-protection rules to bookings and guest data, and keep refunds and complaints with staff.",
+      agriculture: "Check plant-protection, animal-welfare and assurance-scheme requirements locally, and confirm advice with a qualified adviser.",
     },
     factors: [
       { title: "Establish a lawful basis", detail: "Define purpose, necessity and lawful processing before supplying personal data to an AI system." },
@@ -388,6 +448,8 @@ export const COUNTRY_PRACTICAL_CONTEXTS: CountryPracticalContext[] = [
       "barbershops-salons": "Use appointment and preference data with clear consent, avoid sensitive inference and keep a person available for consultations and complaints.",
       "marketing-agencies": "Apply privacy, commercial-message, advertising, language and intellectual-property controls to targeting and synthetic media workflows.",
       "healthcare-clinics": "Provincial health-information rules and Health Canada requirements can apply; clinical AI needs validated intended use and accountable clinician review.",
+      "tourism-hospitality": "Apply federal and provincial consumer and privacy rules to bookings and guest data, and verify bilingual guest content where relevant.",
+      agriculture: "Check provincial and federal rules on pesticides, animal health and food safety, and confirm advice with local extension services or a vet.",
     },
     factors: [
       { title: "Accountability follows the data", detail: "The organization remains responsible for personal information handled by AI providers and connected systems." },
@@ -414,6 +476,8 @@ export const COUNTRY_PRACTICAL_CONTEXTS: CountryPracticalContext[] = [
       "barbershops-salons": "Mobile booking, reminders, voice support and local-language content are practical starting points; keep low-cost manual fallback and live customer handoff.",
       "marketing-agencies": "Multilingual text, image, audio and video production can be immediately useful; verify local cultural fit, rights, claims and the affordability of production tools.",
       "healthcare-clinics": "Administrative drafting and record summaries may help first, but patient data, connectivity, local validation and clinical accountability make connected or diagnostic uses more demanding.",
+      "tourism-hospitality": "Start with fast replies to guest enquiries on messaging apps and booking sites, clear listings and review summaries; keep payments, refunds and guest safety with staff and plan for patchy connectivity.",
+      agriculture: "Voice and photo tools on a basic smartphone are the practical starting point; test local-language support, check advice with an extension officer, and keep a manual record in case service is unavailable.",
     },
     factors: [
       { title: "Localize the system", detail: "Test language, examples, terminology and user experience for Ghanaian markets rather than assuming foreign defaults transfer cleanly." },

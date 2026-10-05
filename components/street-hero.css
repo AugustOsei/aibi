@@ -1,0 +1,216 @@
+.street-hero {
+  --street-night: #14151d;
+  --street-amber: #f2a93b;
+  --street-coral: #ff7f6e;
+  --street-cream: #fbf3e4;
+  background: var(--street-night);
+  color: var(--street-cream);
+}
+
+.street-hero {
+  position: relative;
+  height: calc(100svh - var(--street-top, 72px));
+  min-height: 540px;
+  overflow: hidden;
+  container-type: size;
+  isolation: isolate;
+}
+
+/* Sized like object-fit: cover, anchored to the bottom so the street is never cropped away. */
+.street-hero__art {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: max(100cqw, calc(100cqh * 16 / 9));
+  height: max(100cqh, calc(100cqw * 9 / 16));
+  transform: translateX(-50%);
+}
+.street-hero__scene { position: absolute; inset: 0; }
+.street-hero__scene--tall { display: none; }
+@media (max-aspect-ratio: 4/5) {
+  .street-hero__art {
+    width: max(100cqw, calc(100cqh * 9 / 16));
+    height: max(100cqh, calc(100cqw * 16 / 9));
+  }
+  .street-hero__scene--wide { display: none; }
+  .street-hero__scene--tall { display: block; }
+}
+
+.street-hero__still { position: absolute; inset: 0; opacity: 0; transition: opacity 1100ms ease; }
+.street-hero__still img { display: block; width: 100%; height: 100%; user-select: none; }
+.street-hero__still[data-visible="true"] { opacity: 1; }
+
+.street-hero__clouds {
+  position: absolute;
+  inset: 0 0 44% 0;
+  overflow: hidden;
+  pointer-events: none;
+  mask-image: linear-gradient(to bottom, #000 55%, transparent);
+}
+/* Each span is one loose group of clouds crossing the whole sky. */
+.street-hero__clouds span {
+  position: absolute;
+  top: 10%;
+  left: 0;
+  width: min(40cqw, 420px);
+  aspect-ratio: 533 / 329;
+  background: url("/images/hero/clouds.webp") 0 0 / 300% 100% no-repeat;
+  opacity: .7;
+  filter: brightness(.8) saturate(1.3) hue-rotate(-8deg);
+  transition: filter 1100ms ease;
+  animation: street-hero-drift 120s linear infinite;
+}
+.street-hero__clouds span:nth-child(2) { top: 44%; width: min(30cqw, 300px); background-position: 50% 0; opacity: .5; animation-duration: 175s; animation-delay: -95s; }
+.street-hero__clouds span:nth-child(3) { top: 0; width: min(34cqw, 340px); background-position: 100% 0; opacity: .45; animation-duration: 150s; animation-delay: -60s; }
+@keyframes street-hero-drift {
+  from { transform: translateX(100cqw); }
+  to { transform: translateX(-100%); }
+}
+
+.street-hero__wires { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0; transition: opacity 900ms ease 500ms; }
+.street-hero[data-on="true"] .street-hero__wires { opacity: 1; }
+.street-hero__wires path {
+  fill: none;
+  stroke: #fff3e6;
+  stroke-width: 7;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 5px #ff8f7a) drop-shadow(0 0 12px #ff6a55);
+}
+.street-hero__wire { stroke-dasharray: 22 228; animation: street-hero-wire 3.2s linear infinite; }
+.street-hero__drop { stroke-dasharray: 26 74; animation: street-hero-drop 1.7s linear infinite; }
+@keyframes street-hero-wire { to { stroke-dashoffset: -250; } }
+@keyframes street-hero-drop { to { stroke-dashoffset: -100; } }
+
+
+.street-hero__copy {
+  position: absolute;
+  inset: clamp(28px, 9cqh, 96px) 20px auto;
+  text-align: center;
+  text-shadow: 0 2px 22px rgba(10, 14, 40, .6);
+  pointer-events: none;
+}
+.street-hero__kicker {
+  display: inline-block;
+  margin: 0 0 16px;
+  padding: 6px 14px;
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: 999px;
+  background: rgba(20, 21, 29, .38);
+  color: #ffd79a;
+  font-size: .78rem;
+  font-weight: 650;
+  letter-spacing: .02em;
+}
+.street-hero__copy h1 {
+  max-width: 17ch;
+  margin: 0 auto;
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 3.2vw + 1.3rem, 4.6rem);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -.015em;
+  text-wrap: balance;
+}
+.street-hero__copy h1 span { display: block; margin-bottom: .18em; color: #ffd79a; font-size: .62em; font-style: italic; letter-spacing: 0; }
+
+.street-hero__building {
+  position: absolute;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  cursor: pointer;
+  transition: box-shadow 200ms ease, background 200ms ease;
+}
+.street-hero__building:hover { background: rgba(255, 255, 255, .07); }
+.street-hero__building[aria-pressed="true"] {
+  background: rgba(255, 215, 154, .1);
+  box-shadow: inset 0 0 0 2px var(--street-amber);
+}
+
+.street-hero__glass {
+  align-self: center;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 64px;
+  padding: 8px 26px 8px 8px;
+  border: 1px solid rgba(255, 255, 255, .28);
+  border-radius: 999px;
+  color: #fff;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .2), rgba(255, 255, 255, .07));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35), 0 10px 30px rgba(6, 7, 16, .4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+  backdrop-filter: blur(16px) saturate(1.5);
+  font: inherit;
+  cursor: pointer;
+}
+.street-hero__power {
+  position: relative;
+  flex: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 28%, #ff8a75, #e23d2c 58%, #a52219);
+  box-shadow: inset 0 -3px 6px rgba(80, 10, 5, .45), 0 2px 6px rgba(0, 0, 0, .35);
+  transition: transform 120ms ease, box-shadow 300ms ease;
+}
+.street-hero__glass:active .street-hero__power { transform: scale(.93); }
+.street-hero__power svg { width: 24px; height: 24px; margin: 12px; fill: none; stroke: #fff; stroke-width: 2.4; stroke-linecap: round; }
+.street-hero__glass[aria-checked="true"] .street-hero__power { box-shadow: inset 0 -3px 6px rgba(80, 10, 5, .45), 0 0 20px rgba(255, 95, 72, .9); }
+.street-hero__glass[aria-checked="false"] .street-hero__power::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border: 2px solid #ff7a66;
+  border-radius: 50%;
+  animation: street-hero-nudge 2.2s ease-out infinite;
+}
+@keyframes street-hero-nudge {
+  0% { opacity: .9; transform: scale(1); }
+  70%, 100% { opacity: 0; transform: scale(1.45); }
+}
+.street-hero__glass-text { font-size: 1rem; font-weight: 650; text-shadow: 0 1px 8px rgba(10, 12, 26, .5); white-space: nowrap; }
+
+.street-hero__dock {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(14px, 3cqh, 32px);
+  width: min(100% - 28px, 520px);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transform: translateX(-50%);
+}
+.street-hero__line {
+  margin: 0;
+  color: #fff;
+  font-size: .95rem;
+  line-height: 1.4;
+  text-align: center;
+  text-shadow: 0 1px 12px rgba(8, 10, 24, .85);
+  text-wrap: balance;
+}
+.street-hero__go {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: var(--street-cream);
+  color: #1b1408;
+  font-size: .95rem;
+  box-shadow: 0 10px 30px rgba(6, 7, 16, .4);
+}
+.street-hero__go b { font-weight: 650; white-space: nowrap; }
+.street-hero__go--soon { background: rgba(30, 32, 46, .86); color: #e3dff0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .street-hero__clouds span,
+  .street-hero__wires path,
+  .street-hero__power::after { animation: none !important; }
+  .street-hero__still { transition-duration: 1ms; }
+  .street-hero__wires { display: none; }
+}

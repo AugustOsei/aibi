@@ -68,8 +68,8 @@ const mappings = {
     note: "Broad construction-sector evidence; it includes contractor types beyond the representative AIBI archetype.",
   },
   restaurants: {
-    slugs: ["restaurants"],
-    note: "Accommodation and food services is broader than restaurants and includes accommodation businesses.",
+    slugs: ["restaurants", "tourism-hospitality"],
+    note: "Accommodation and food services covers both restaurants and accommodation businesses, so it is a broad proxy for either.",
   },
   retail: {
     slugs: ["retail-stores"],

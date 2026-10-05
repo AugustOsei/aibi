@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { StatusChip } from "../../components/status-chip";
+import { Flag } from "../../components/home-explorer";
 import { getCountrySummaries } from "../../src/application/aibi-service";
 import { createPageMetadata } from "../../src/config/site";
+import "../../components/home.css";
+import "../../components/pages.css";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Countries",
@@ -12,29 +14,28 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 export default function CountriesPage() {
-  const countries = getCountrySummaries();
+  const countries = [...getCountrySummaries()].sort((a, b) => Number(b.slug === "ghana") - Number(a.slug === "ghana"));
   return (
-    <div className="shell page-shell">
-      <header className="page-intro">
-        <p className="eyebrow">Explore countries</p>
-        <h1>Start with the market you want to understand.</h1>
-        <p>Country context helps explain the conditions businesses operate in. Where official data exists, AIBI also shows reported AI use by broad industry sector—without turning imperfect matches into invented scores.</p>
+    <div className="home-flat pg">
+      <header className="pg-head shell">
+        <p className="home-label">Countries</p>
+        <h1>{countries.length} countries so far.</h1>
+        <p>The country shapes what is practical: cost, connectivity, language and local rules. Where official surveys exist, we also show how many businesses report using AI. More countries are being added.</p>
       </header>
-      <section className="coverage-summary" aria-labelledby="country-coverage-heading">
-        <div><p className="eyebrow">Initial coverage</p><h2 id="country-coverage-heading">United States, United Kingdom, Canada, and Ghana</h2></div>
-        <p>More countries are being added over time. New profiles will appear only when there is enough context to present them honestly.</p>
+      <section className="shell" aria-label="Countries covered">
+        <ul className="pg-rows">
+          {countries.map(({ slug, name, iso2, status }) => (
+            <li key={slug}>
+              <Link href={`/countries/${slug}`}>
+                <Flag iso2={iso2} />
+                <strong>{name}</strong>
+                <small>{status === "insufficient_evidence" ? "Reported AI use not yet measured" : "Reported AI use available by sector"}</small>
+                <b aria-hidden="true">→</b>
+              </Link>
+            </li>
+          ))}
+        </ul>
       </section>
-      <div className="country-directory">
-        {countries.map((country, index) => (
-          <Link href={`/countries/${country.slug}`} className="country-card" key={country.slug}>
-            <div><span>{String(index + 1).padStart(2, "0")}</span><b>{country.iso2}</b></div>
-            <h2>{country.name}</h2>
-            <StatusChip status={country.status} />
-            <p>{country.statusLabel}</p>
-            <small>Open country profile →</small>
-          </Link>
-        ))}
-      </div>
     </div>
   );
 }

@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
+
 import { createPageMetadata } from "../../src/config/site";
+import { AI_CAPABILITY_HORIZON } from "../../src/data/ai-capability-horizon";
+import "../../components/home.css";
+import "../../components/pages.css";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Updates",
@@ -16,31 +20,43 @@ const updateTypes = [
 ] as const;
 
 export default function UpdatesPage() {
+  const reviewed = new Date(`${AI_CAPABILITY_HORIZON.lastReviewed}T00:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
   return (
-    <div className="shell page-shell updates-page">
-      <header className="page-intro">
-        <p className="eyebrow">AIBI updates</p>
-        <h1>Follow how the index changes.</h1>
-        <p>AI capabilities, costs and adoption do not stand still, so AIBI is periodically reevaluated too. This is where we’ll record meaningful changes to country coverage, industry analysis, evidence, methods and classifications.</p>
+    <div className="home-flat pg">
+      <header className="pg-head shell">
+        <p className="home-label">Updates</p>
+        <h1>How the index changes.</h1>
+        <p>AI capabilities, costs and adoption do not stand still, so AIBI is reviewed periodically. Meaningful changes are recorded here.</p>
       </header>
 
-      <section className="updates-register" aria-labelledby="updates-register-heading">
+      <section className="pg-split shell" aria-labelledby="updates-latest-heading">
         <div>
-          <p className="eyebrow">What will be tracked</p>
-          <h2 id="updates-register-heading">Changes worth noting</h2>
+          <p className="home-label">Latest review</p>
+          <h2 id="updates-latest-heading">{reviewed}</h2>
         </div>
-        <ol>
-          {updateTypes.map((update, index) => (
-            <li key={update}><span>{String(index + 1).padStart(2, "0")}</span>{update}</li>
-          ))}
-        </ol>
+        <div>
+          <p>The list of AI models and products the index is reviewed against was last checked on this date.</p>
+        </div>
       </section>
 
-      <section className="updates-placeholder" aria-labelledby="updates-placeholder-heading">
-        <p className="eyebrow">Email updates</p>
-        <h2 id="updates-placeholder-heading">A simple update list is planned.</h2>
-        <p>There is no subscription system connected yet. Until it is available, this page will remain the home for AIBI update notes.</p>
-        <span aria-disabled="true">Email updates coming later</span>
+      <section className="pg-split shell" aria-labelledby="updates-register-heading">
+        <div>
+          <p className="home-label">What is tracked</p>
+          <h2 id="updates-register-heading">Changes worth noting</h2>
+        </div>
+        <ul className="pg-list">
+          {updateTypes.map((update) => <li key={update}><strong>{update}</strong></li>)}
+        </ul>
+      </section>
+
+      <section className="pg-split shell" aria-labelledby="updates-email-heading">
+        <div>
+          <p className="home-label">Email updates</p>
+          <h2 id="updates-email-heading">Not available yet.</h2>
+        </div>
+        <div>
+          <p>There is no subscription list yet. Until there is, this page is the home for AIBI update notes.</p>
+        </div>
       </section>
     </div>
   );
