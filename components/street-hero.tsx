@@ -115,7 +115,7 @@ export function StreetHero({ countrySlug = "ghana" }: { countrySlug?: string }) 
       </div>
 
       <div className="street-hero__copy">
-        <p className="street-hero__kicker">The first AI Business Index for Ghana</p>
+        <p className="street-hero__kicker">AIBI · The Artificial Intelligence Business Index</p>
         <h1 id="street-hero-heading">
           <span>If AI is the new electricity,</span> what can it do for your business?
         </h1>
