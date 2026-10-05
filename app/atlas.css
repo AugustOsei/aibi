@@ -914,6 +914,7 @@ body { background: var(--aibi-paper); }
 .footer-copy, .footer-note { color: #657168; }
 .footer-note p { margin: 0 0 14px; }
 .footer-note a { color: var(--aibi-green); font-weight: 700; line-height: 1.45; }
+.footer-note .footer-built { margin: 14px 0 0; }
 
 /* Editorial product context: coverage, origin, and living-index updates. */
 .home-continuation { padding-block: 70px 110px; }

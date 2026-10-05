@@ -18,6 +18,7 @@ export function SiteFooter() {
         <div className="footer-note">
           <p>Missing evidence is shown as unavailable—not as zero.</p>
           <a href="https://www.theaugustdispatch.com" target="_blank" rel="noreferrer">Founded by the publisher of The August Dispatch ↗</a>
+          <p className="footer-built">Built by <a href="https://www.augustengine.com" target="_blank" rel="noreferrer">August Engine ↗</a></p>
         </div>
       </div>
     </footer>
