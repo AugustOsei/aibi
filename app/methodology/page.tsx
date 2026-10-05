@@ -6,7 +6,7 @@ import "../../components/pages.css";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Methodology",
-  description: "How AIBI separates possible AI utilization from observed adoption evidence and calculates a gap only when measures are compatible.",
+  description: "How AIBI keeps what AI makes possible separate from what businesses report using, and why missing evidence is never shown as zero.",
   path: "/methodology",
 });
 

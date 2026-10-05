@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   applicationName: SITE_NAME,
   title: { default: "Artificial Intelligence Business Index — AI Opportunity vs Adoption", template: "%s | AIBI" },
-  description: "See what industries could be doing with today’s AI, what credible evidence says they are doing, and the utilization gap.",
+  description: "Practical ways a business can use today’s AI, industry by industry and country by country, with reported AI use shown where official surveys exist.",
   keywords: [
     "AI applications by industry",
     "how industries use AI",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: "Artificial Intelligence Business Index — AI Opportunity vs Adoption",
-    description: "Explore possible AI utilization by country and industry, review observed utilization evidence, and see where a gap can—or cannot—be measured.",
+    description: "Pick a country and an industry to see practical uses of today’s AI, check what your business already does, and see how many businesses report using AI.",
     type: "website",
     siteName: SITE_NAME,
     url: "/",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "AI Opportunity vs Adoption by Industry | AIBI",
-    description: "See possible AI utilization, observed industry use, and the evidence gap.",
+    description: "Practical AI uses by industry and country, with reported business use where surveys exist.",
   },
   robots: {
     index: true,

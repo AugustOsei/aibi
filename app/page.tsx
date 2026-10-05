@@ -6,7 +6,7 @@ import { createPageMetadata } from "../src/config/site";
 
 export const metadata: Metadata = createPageMetadata({
   title: "AI Opportunity vs Adoption by Industry",
-  description: "Choose a country and industry to explore the complete range of practical AI uses, credible observed utilization, and the evidence gap.",
+  description: "Pick a country and an industry to see practical ways a business can use today’s AI, check what yours already does, and see how many businesses report using AI.",
   path: "/",
   socialTitle: "Artificial Intelligence Business Index — AI Opportunity vs Adoption",
 });

@@ -9,7 +9,7 @@ import "../../components/pages.css";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Countries",
-  description: "Explore AIBI country coverage and official broad-sector evidence for AI utilization.",
+  description: "The countries AIBI covers, with the share of businesses reporting AI use where official surveys exist.",
   path: "/countries",
 });
 

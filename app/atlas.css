@@ -1027,8 +1027,8 @@ body { background: var(--aibi-paper); }
   .shell { width: min(100% - 28px, 1180px); }
   .site-header__top { min-height: 62px; }
   .wordmark__name { display: none; }
-  .site-nav__inner { gap: 17px; }
-  .site-nav a { font-size: .61rem; }
+  .site-nav__inner { gap: 12px; justify-content: space-between; padding-bottom: 0; }
+  .site-nav a { padding-block: 13px; font-size: .75rem; }
   .journey { padding-block: 25px 22px; }
   .journey__intro { margin-bottom: 22px; }
   .journey__intro h1 { font-size: clamp(2.85rem, 12vw, 4.1rem); }

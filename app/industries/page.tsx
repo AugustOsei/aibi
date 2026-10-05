@@ -8,7 +8,7 @@ import "../../components/pages.css";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Industries",
-  description: "Explore practical AI opportunity, observed utilization, and evidence gaps across the industries currently covered by AIBI.",
+  description: "Pick a country and an industry to see practical ways that kind of business can use AI today.",
   path: "/industries",
 });
 

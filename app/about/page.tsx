@@ -7,7 +7,7 @@ import "../../components/pages.css";
 
 export const metadata: Metadata = createPageMetadata({
   title: "About",
-  description: "Why the Artificial Intelligence Business Index tracks possible AI utilization, observed industry adoption, and the evidence gap between them.",
+  description: "Why the Artificial Intelligence Business Index lists practical AI uses by industry and country, and shows reported business use where evidence exists.",
   path: "/about",
 });
 

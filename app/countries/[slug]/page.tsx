@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 
 import { Flag } from "../../../components/home-explorer";
 import { getCountryEvidence, getCountrySummaries, getCountrySummary, getIndustrySummaries } from "../../../src/application/aibi-service";
+import { countryInSentence, formatPeriod } from "../../../src/config/phrases";
 import { createPageMetadata } from "../../../src/config/site";
 import "../../../components/home.css";
 import "../../../components/pages.css";
@@ -20,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const name = country?.name ?? "Country";
   return createPageMetadata({
     title: name,
-    description: `Explore available AI utilization evidence and industry context for ${name}.`,
+    description: `Practical AI uses for businesses in ${countryInSentence(name)}, by industry, with reported AI use where an official survey exists.`,
     path: `/countries/${slug}`,
   });
 }
@@ -32,7 +33,7 @@ export default async function CountryPage({ params }: Props) {
   const evidence = getCountryEvidence(slug);
   if (!evidence) notFound();
   const industries = getIndustrySummaries();
-  const period = evidence.observations[0]?.period;
+  const period = evidence.observations[0] ? formatPeriod(evidence.observations[0].period) : undefined;
 
   return (
     <div className="home-flat pg">
@@ -44,7 +45,7 @@ export default async function CountryPage({ params }: Props) {
 
       <section className="shell" aria-labelledby="country-industries-heading">
         <p className="home-label">Industries</p>
-        <h2 id="country-industries-heading">What kind of business in {country.name}?</h2>
+        <h2 id="country-industries-heading">What kind of business in {countryInSentence(country.name)}?</h2>
         <ul className="pg-rows pg-rows--plain" style={{ marginTop: 24 }}>
           {industries.map((industry) => {
             const observation = evidence.observations.find(({ mappedIndustries }) => mappedIndustries.some((item) => item.slug === industry.slug));

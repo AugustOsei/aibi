@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { CA, GB, GH, US } from "country-flag-icons/react/1x1";
 
+import { countryInSentence } from "../src/config/phrases";
 import type { CountrySummaryView, IndustrySummaryView } from "../src/application/aibi-service";
 
 const FLAGS: Record<string, typeof GH> = { GH, US, GB, CA };
@@ -88,9 +89,9 @@ export function IndustryPicker({ countries, industries, defaultCountry = "ghana"
       <div className="home-picker__industries">
         <h3>
           {active ? <Flag iso2={active.iso2} /> : null}
-          What kind of business in {active?.name}?
+          What kind of business in {active ? countryInSentence(active.name) : ""}?
         </h3>
-        <ol aria-label={`Industries in ${active?.name}`}>
+        <ol aria-label={`Industries in ${active ? countryInSentence(active.name) : ""}`}>
           {industries.map(({ slug, name, description }, index) => (
             <li key={slug}>
               <Link href={`/${country}/${slug}`}>

@@ -7,7 +7,7 @@ import "../../components/pages.css";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Updates",
-  description: "Follow changes to AIBI country coverage, industry analysis, AI capability assessments, and adoption evidence.",
+  description: "When AIBI was last reviewed and what kinds of changes are recorded: new countries, new industries, AI capability changes and new evidence.",
   path: "/updates",
 });
 
