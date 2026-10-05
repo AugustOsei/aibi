@@ -9,6 +9,7 @@ import {
 import { AI_CAPABILITY_HORIZON, COMMON_BUSINESS_FUNCTIONS } from "../src/data/ai-capability-horizon";
 import type { CountryPracticalContext, IndustryOutlook } from "../src/data/industry-outlooks";
 import { countryInSentence as inSentence, industrySubject } from "../src/config/phrases";
+import { SITE_URL } from "../src/config/site";
 import { Flag } from "./home-explorer";
 import { IndustryUses } from "./industry-uses";
 import "./home.css";
@@ -65,7 +66,16 @@ export function IndustryView({ outlook, country, countryContext, children }: {
       <section className="shell" aria-labelledby="ind-uses-heading">
         <p className="home-label">Where to start</p>
         <h2 id="ind-uses-heading" className="ind-uses__heading">{COMMON_BUSINESS_FUNCTIONS.length + (outlook.tiers.find(({ id }) => id === "standard")?.useCases.length ?? 0)} practical uses, with tools available today.</h2>
-        <IndustryUses tiers={outlook.tiers} industryName={industry} commonFunctions={COMMON_BUSINESS_FUNCTIONS} countryName={countryContext?.name} tierGuidance={countryContext?.tierGuidance} />
+        <IndustryUses
+          tiers={outlook.tiers}
+          industryName={industry}
+          commonFunctions={COMMON_BUSINESS_FUNCTIONS}
+          countryName={countryContext?.name}
+          tierGuidance={countryContext?.tierGuidance}
+          storageKey={`aibi-check:v1:${country?.slug ?? "all"}:${outlook.slug}`}
+          shareUrl={`${SITE_URL}${country ? `/${country.slug}/${outlook.slug}` : `/industries/${outlook.slug}`}`}
+          shareSubject={`${industry}${country ? ` in ${inSentence(country.name)}` : ""}`}
+        />
         <p className="ind-basis">Based on a representative {outlook.archetype.toLowerCase()}. These are possibilities, not a claim about what businesses already do.</p>
       </section>
 

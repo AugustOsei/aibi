@@ -29,6 +29,39 @@
 .ind-uses__panel { border: 1px solid var(--flat-rule); border-top: 6px solid var(--flat-amber); }
 .ind-uses__panel[data-level="integrated"] { border-top-color: var(--flat-coral); }
 .ind-uses__panel[data-level="advanced"] { border-top-color: var(--flat-dusk); }
+.ind-uses__prompt { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin: 18px 20px 0; padding: 12px 14px; background: var(--flat-amber); font-size: 1rem; font-weight: 600; }
+.ind-uses__prompt b { font-family: var(--font-mono); font-size: .9rem; font-weight: 400; white-space: nowrap; }
+.ind-uses ol[data-checkable] li { display: grid; grid-template-columns: 60px minmax(0, 1fr); }
+.ind-uses ol[data-checkable] li summary { grid-template-columns: minmax(0, 1fr) 22px; padding-left: 0; }
+.ind-uses ol[data-checkable] li details > div { padding-left: 0; }
+.ind-tick { position: relative; align-self: start; width: 60px; height: 100%; min-height: 64px; padding: 0; border: 0; background: none; cursor: pointer; }
+.ind-tick::before { content: ""; position: absolute; top: 20px; left: 20px; width: 24px; height: 24px; border: 2px solid var(--flat-ink); background: var(--flat-paper); transition: background 120ms ease; }
+.ind-tick::after { content: ""; position: absolute; top: 25px; left: 28px; width: 7px; height: 12px; border: solid var(--flat-ink); border-width: 0 3px 3px 0; opacity: 0; transform: rotate(45deg); }
+.ind-tick:hover::before { background: var(--flat-panel); }
+.ind-tick[aria-checked="true"]::before { background: var(--flat-amber); }
+.ind-tick[aria-checked="true"]::after { opacity: 1; }
+.ind-tick:focus-visible { outline: 3px solid var(--flat-signal); outline-offset: -3px; }
+
+.ind-result { margin-top: 18px; padding: clamp(22px, 3vw, 36px) !important; color: #f5f3ee; background: var(--flat-dusk); }
+.ind-result .home-label { margin-bottom: 14px; }
+.ind-result .home-label::before { background: var(--flat-amber); }
+.ind-result h3 { margin: 0; font-size: clamp(1.5rem, 1.8vw + 1rem, 2.6rem); font-weight: 500; letter-spacing: -.02em; line-height: 1.1; }
+.ind-result[data-started="false"] h3 { max-width: 24ch; font-size: clamp(1.25rem, 1vw + 1rem, 1.7rem); color: #c9c6cf; }
+.ind-result h3 strong { color: var(--flat-amber); font-weight: 600; }
+.ind-result__bar { display: flex; gap: 4px; margin-top: 20px; }
+.ind-result__bar i { flex: 1; height: 16px; background: rgba(255, 255, 255, .16); }
+.ind-result__bar i[data-on="true"] { background: var(--flat-amber); }
+.ind-result__next { margin-top: 24px; }
+.ind-result__next p { margin: 0 0 8px; font-family: var(--font-mono); font-size: .74rem; letter-spacing: .08em; text-transform: uppercase; }
+.ind-result__next ul { margin: 0; padding: 0; list-style: none; border-top: 1px solid rgba(255, 255, 255, .24); }
+.ind-result__next li { padding: 11px 0; border-bottom: 1px solid rgba(255, 255, 255, .14); font-size: 1.05rem; }
+.ind-result__done { max-width: 52ch; margin: 20px 0 0; color: #c9c6cf; line-height: 1.5; }
+.ind-result__actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.ind-result__actions a, .ind-result__actions button { min-height: 46px; display: inline-flex; align-items: center; padding: 0 18px; border: 1px solid #f5f3ee; color: #f5f3ee; background: none; font: inherit; font-weight: 600; cursor: pointer; }
+.ind-result__actions a { border-color: var(--flat-amber); color: var(--flat-ink); background: var(--flat-amber); }
+.ind-result__actions .is-quiet { border-color: transparent; color: #c9c6cf; font-weight: 500; text-decoration: underline; }
+.ind-result__note { margin: 16px 0 0; color: #a6a3ad; font-size: .86rem; }
+
 .ind-uses__further { margin-top: 18px; border: 1px solid var(--flat-hair); }
 .ind-uses__further > summary { display: grid; grid-template-columns: 1fr; gap: 4px; padding: 18px 20px; cursor: pointer; }
 .ind-uses__further > summary strong { font-size: 1.1rem; font-weight: 600; }
@@ -92,5 +125,11 @@
   .ind-uses__further > .ind-uses__panel { margin: 0 10px 10px; }
   .ind-uses li summary { grid-template-columns: 28px minmax(0, 1fr) 18px; padding: 16px 12px; }
   .ind-uses__about, .ind-uses__local, .ind-uses__panel h3 { padding-inline: 12px; }
+  .ind-uses__prompt { margin-inline: 12px; }
+  .ind-uses ol[data-checkable] li { grid-template-columns: 48px minmax(0, 1fr); }
+  .ind-tick { width: 48px; }
+  .ind-tick::before { top: 16px; left: 12px; }
+  .ind-tick::after { top: 21px; left: 20px; }
+  .ind-uses ol[data-checkable] li summary { padding-left: 0; }
   .ind-uses li details > div { padding: 4px 12px 20px; }
 }
